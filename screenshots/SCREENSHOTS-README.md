@@ -12,38 +12,36 @@ cypress/screenshots/
 ├── 01-dashboard/
 │   └── 01-dashboard.png         (46KB)
 ├── 02-purchase/
-│   ├── 01-tela-inicial.png      (135KB)
-│   └── 02-criar-pedido.png      (135KB)
+│   ├── 01-tela-inicial.png      (50KB)
+│   └── 02-criar-pedido.png      (93KB)
 ├── 03-inventory/
-│   ├── 01-tela-inicial.png      (140KB)
-│   └── 02-criar-transferencia.png (140KB)
+│   ├── 01-tela-inicial.png      (165KB)
+│   └── 02-criar-transferencia.png (67KB)
 └── 04-invoicing/
-    ├── 01-tela-inicial.png      (181KB)
-    └── 02-criar-fatura.png      (182KB)
+    ├── 01-tela-inicial.png      (270KB)
+    └── 02-criar-fatura.png      (71KB)
 ```
 
 ## Modulos Capturados
 
-| Modulo | Screenshots | Descricao |
-|--------|-------------|-----------|
-| **Login** | 2 | Tela de login e apos login |
-| **Dashboard** | 1 | Tela inicial do sistema |
-| **Purchase** | 2 | Lista de pedidos e criacao |
-| **Inventory** | 2 | Lista de transferencias e criacao |
-| **Invoicing** | 2 | Lista de faturas e criacao |
+| Modulo | Status | Registros |
+|--------|--------|-----------|
+| **Purchase** | OK | Purchase Requests (RFQ) |
+| **Inventory** | OK | Transfers (15 registros) |
+| **Invoicing** | OK | Invoices (4 registros) |
 
 ## Como Gerar Novos Screenshots
 
 ```bash
 cd docsia/screenshots
-node screenshot-fixed.js
+node screenshot-menu-click.js
 ```
 
-## Para Usar nos Treinamentos
+## Notas Tecnicas
 
-1. Copie os screenshots desejados
-2. Cole na pasta `treinamentos/{fluxo}/prints/`
-3. Referencia nos arquivos `.md` ou `.html`
+- Navegacao via menu clicavel (nao via URL)
+- Erros de servidor evitados
+- Screenshots validos sem dialogos de erro
 
 ---
 
