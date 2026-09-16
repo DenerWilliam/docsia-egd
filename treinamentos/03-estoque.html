@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treinamento Estoque — Odoo 16 | EGD</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        :root{--primary:#714B67;--primary-light:#8B6B7F;--primary-dark:#5A3A52;--accent:#9C6B8E;--bg:#FAF8F9;--card:#FFF;--text:#2D2327;--text-light:#6B5E63;--border:#E8E0E4;--success:#2E7D32;--warning:#F57C00;--error:#C62828;--info:#1565C0;--code-bg:#F5F0F2;--shadow:0 2px 12px rgba(113,75,103,.08)}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+        .hero{background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 50%,var(--accent) 100%);color:#fff;padding:3rem 2rem;text-align:center;position:relative;overflow:hidden}
+        .hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%)}
+        .hero h1{font-size:2.2rem;font-weight:700;margin-bottom:.5rem;position:relative}
+        .hero p{font-size:1.1rem;opacity:.9;position:relative}
+        .hero .badge{display:inline-block;background:rgba(255,255,255,.2);padding:.3rem 1rem;border-radius:20px;font-size:.85rem;margin-top:1rem;position:relative}
+        .nav{background:var(--card);border-bottom:1px solid var(--border);padding:1rem 2rem;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
+        .nav-inner{max-width:1100px;margin:0 auto;display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+        .nav a{text-decoration:none;color:var(--text-light);padding:.4rem .9rem;border-radius:6px;font-size:.85rem;font-weight:500;transition:all .2s}
+        .nav a:hover{background:var(--primary);color:#fff}
+        .container{max-width:1100px;margin:0 auto;padding:2rem}
+        .section{background:var(--card);border-radius:12px;padding:2rem;margin-bottom:2rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+        .section h2{font-size:1.5rem;color:var(--primary);margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:2px solid var(--primary);display:flex;align-items:center;gap:.5rem}
+        .section h2 .icon{width:32px;height:32px;background:var(--primary);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+        .section h3{font-size:1.15rem;color:var(--text);margin:1.5rem 0 .75rem;padding-left:.5rem;border-left:3px solid var(--accent)}
+        .step{background:var(--bg);border-radius:10px;padding:1.25rem;margin:1rem 0;border-left:4px solid var(--primary);position:relative}
+        .step h4{color:var(--primary-dark);margin-bottom:.5rem;font-size:1rem}
+        .step .menu-path{display:inline-block;background:var(--code-bg);padding:.2rem .6rem;border-radius:4px;font-family:'Cascadia Code','Fira Code',monospace;font-size:.8rem;color:var(--primary);margin-bottom:.5rem;border:1px solid var(--border)}
+        .step ol,.step ul{padding-left:1.5rem;margin:.5rem 0}
+        .step li{margin:.3rem 0;font-size:.95rem}
+        .step li strong{color:var(--primary-dark)}
+        .alert{padding:.75rem 1rem;border-radius:8px;margin:.75rem 0;font-size:.9rem;display:flex;align-items:flex-start;gap:.5rem}
+        .alert-info{background:#E3F2FD;border-left:4px solid var(--info);color:#0D47A1}
+        .alert-warning{background:#FFF3E0;border-left:4px solid var(--warning);color:#E65100}
+        .alert-success{background:#E8F5E9;border-left:4px solid var(--success);color:#1B5E20}
+        .alert-error{background:#FFEBEE;border-left:4px solid var(--error);color:#B71C1C}
+        table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+        th{background:var(--primary);color:#fff;padding:.6rem .8rem;text-align:left;font-weight:600}
+        td{padding:.5rem .8rem;border-bottom:1px solid var(--border)}
+        tr:nth-child(even){background:var(--bg)}
+        tr:hover{background:#F3E8EE}
+        .mermaid{background:#fff;border-radius:10px;padding:1.5rem;margin:1rem 0;text-align:center;overflow-x:auto;border:1px solid var(--border)}
+        .mermaid-title{font-weight:600;color:var(--primary);margin-bottom:.75rem;font-size:.95rem}
+        .checklist{list-style:none;padding:0}
+        .checklist li{padding:.4rem 0;padding-left:1.8rem;position:relative;font-size:.9rem}
+        .checklist li::before{content:'☐';position:absolute;left:0;color:var(--primary);font-size:1rem}
+        .modules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;margin:1rem 0}
+        .module-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.75rem;font-size:.85rem}
+        .module-card code{background:var(--primary);color:#fff;padding:.15rem .4rem;border-radius:3px;font-size:.75rem}
+        .module-card p{color:var(--text-light);margin-top:.25rem;font-size:.8rem}
+        .footer{text-align:center;padding:2rem;color:var(--text-light);font-size:.85rem;border-top:1px solid var(--border);margin-top:2rem}
+        @media(max-width:768px){.hero h1{font-size:1.5rem}.container{padding:1rem}.section{padding:1.25rem}.nav a{font-size:.75rem;padding:.3rem .6rem}}
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>Treinamento: Fluxo de Estoque</h1>
+    <p>Entradas, Saidas e Inventarios — Odoo 16</p>
+    <div class="badge">Modulos: stock + stock_account + l10n_br_stock + stock_picking_batch</div>
+</div>
+
+<div class="nav">
+    <div class="nav-inner">
+        <a href="#fluxos">Fluxos</a>
+        <a href="#config">Configuracao</a>
+        <a href="#entrada">Entrada</a>
+        <a href="#saida">Saida</a>
+        <a href="#transferencia">Transferencia</a>
+        <a href="#inventario">Inventario</a>
+        <a href="#lotes">Lotes</a>
+        <a href="#erros">Erros</a>
+        <a href="#modulos">Modulos</a>
+    </div>
+</div>
+
+<div class="container">
+
+<!-- ==================== FLUXOS ==================== -->
+<div class="section" id="fluxos">
+    <h2><span class="icon">~</span> Fluxos Visuais</h2>
+
+    <div class="mermaid-title">Fluxo Geral de Estoque</div>
+    <div class="mermaid">
+flowchart TD
+    START([Inicio]) --> TIPO{Tipo de<br/>Operacao?}
+    TIPO -->|Entrada| ENT[Recebimento<br/>de Fornecedor]
+    TIPO -->|Saida| SAI[Expedicao<br/>para Cliente]
+    TIPO -->|Interna| INT[Transferencia<br/>entre Locais]
+    TIPO -->|Devolucao| DEV[Devolucao<br/>de Cliente]
+    ENT --> VAL1{Quantidades<br/>Corretas?}
+    VAL1 -->|Sim| BAI1[Baixar<br/>Estoque]
+    VAL1 -->|Nao| AJUS1[Ajustar<br/>e Validar]
+    SAI --> VAL2{Estoque<br/>Disponivel?}
+    VAL2 -->|Sim| BAI2[Baixar<br/>Estoque]
+    VAL2 -->|Nao| EST[Estoque<br/>Insuficiente]
+    INT --> VAL3{Itens<br/>Disponiveis?}
+    VAL3 -->|Sim| BAI3[Transferir<br/>Locais]
+    VAL3 -->|Nao| AGU[Aguardar<br/>Disponibilidade]
+    DEV --> VAL4{Produto<br/>Correto?}
+    VAL4 -->|Sim| BAI4[Devolver<br/>ao Estoque]
+    VAL4 -->|Nao| REJ[Rejeitar<br/>e Notificar]
+    BAI1 --> FIM([FIM])
+    BAI2 --> FIM
+    BAI3 --> FIM
+    BAI4 --> FIM
+    </div>
+
+    <div class="mermaid-title">Fluxo de Entrada: Recebimento</div>
+    <div class="mermaid">
+flowchart LR
+    subgraph RECEBIMENTO["1. RECEBIMENTO"]
+        R1[Nota Fiscal]
+        R2[Conferencia Fisica]
+        R3[Verificar Lotes]
+    end
+    subgraph VALIDACAO["2. VALIDACAO"]
+        V1[Verificar Quantidades]
+        V2[Confirmar Qualidade]
+        V3[Validar Transferencia]
+    end
+    subgraph ESTOQUE["3. ESTOQUE"]
+        E1[Baixa Automatica]
+        E2[Movimentacao Criada]
+        E3[Documento Fiscal]
+        E4[Custo Atualizado]
+    end
+    RECEBIMENTO --> VALIDACAO --> ESTOQUE
+    </div>
+
+    <div class="mermaid-title">Fluxo de Saida: Expedicao</div>
+    <div class="mermaid">
+flowchart LR
+    subgraph PEDIDO["1. PEDIDO"]
+        P1[Pedido de Venda]
+        P2[Reserva Estoque]
+        P3[Lista Separacao]
+    end
+    subgraph SEPARACAO["2. SEPARACAO"]
+        S1[Coletar Itens]
+        S2[Conferir Quantidades]
+        S3[Embalar]
+    end
+    subgraph EXPEDICAO["3. EXPEDICAO"]
+        E1[Validar Saida]
+        E2[Baixar Estoque]
+        E3[Gerar NF-e]
+        E4[Expedir]
+    end
+    PEDIDO --> SEPARACAO --> EXPEDICAO
+    </div>
+
+    <div class="mermaid-title">Fluxo de Decisao: Tipo de Movimentacao</div>
+    <div class="mermaid">
+flowchart TD
+    START([Movimentacao]) --> Q1{Origem?}
+    Q1 -->|Fornecedor| ENT[Entrada<br/>Recebimento]
+    Q1 -->|Cliente| SAI[Saida<br/>Expedicao]
+    Q1 -->|Filial| TRANS[Transferencia<br/>Interna]
+    Q1 -->|Devolucao| DEV[Devolucao]
+    Q2{Destino?}
+    Q2 -->|Estoque| EST[Estoque Principal]
+    Q2 -->|Cliente| CLI[Local de Cliente]
+    Q2 -->|Fornecedor| FOR[Local de Fornecedor]
+    Q2 -->|Outro| OUT[Outro Local]
+    </div>
+
+    <div class="mermaid-title">Fluxo de Erros e Correcoes</div>
+    <div class="mermaid">
+flowchart TD
+    ERRO([Erro no Estoque]) --> TYPE{Tipo do Erro?}
+    TYPE -->|Negativo| E1[Estoque Negativo<br/>Verificar Movimentacoes<br/>e Corrigir]
+    TYPE -->|Lote| E2[Lote Nao Encontrado<br/>Cadastrar Lote<br/>na Entrada]
+    TYPE -->|Quantidade| E3[Quantidade Errada<br/>Realizar Inventario<br/>e Ajustar]
+    TYPE -->|Local| E4[Local Incorreto<br/>Transferir para<br/>Local Correto]
+    TYPE -->|Custo| E5[Custo Errado<br/>Verificar Notas<br/>Fiscais de Entrada]
+    TYPE -->|Rastreabilidade| E6[Rastreabilidade<br/>Incompleta<br/>Registrar Lote]
+    E1 --> CORR[Corrigir e Reprocessar]
+    E2 --> CORR
+    E3 --> CORR
+    E4 --> CORR
+    E5 --> CORR
+    E6 --> CORR
+    CORR --> OK([Estoque Correto])
+    </div>
+</div>
+
+<!-- ==================== CONFIGURACAO ==================== -->
+<div class="section" id="config">
+    <h2><span class="icon">1</span> Parte 1: Configuracao Inicial</h2>
+
+    <div class="step">
+        <h4>Etapa 1.1 — Configurar Locais de Estoque</h4>
+        <div class="menu-path">Estoque > Configuracoes > Locais</div>
+        <ol>
+            <li>Verifique os locais padrao:
+                <ul>
+                    <li><strong>WH/Stock:</strong> Estoque principal</li>
+                    <li><strong>WH/Input:</strong> Recebimento</li>
+                    <li><strong>WH/Output:</strong> Expedicao</li>
+                    <li><strong>WH/Customers:</strong> Clientes</li>
+                    <li><strong>WH/Vendor Locations:</strong> Fornecedores</li>
+                </ul>
+            </li>
+            <li>Crie locais adicionais se necessario:
+                <ul>
+                    <li><strong>Estoque Reservado:</strong> Para itens reservados</li>
+                    <li><strong>Estoque em Transito:</strong> Para transferencias</li>
+                    <li><strong>Defeituosos:</strong> Para produtos com defeito</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 1.2 — Configurar Operacoes de Estoque</h4>
+        <div class="menu-path">Estoque > Configuracoes > Operacoes</div>
+        <ol>
+            <li>Verifique as operacoes padrao:
+                <ul>
+                    <li><strong>Entrada (Receipt):</strong> Recebimento de fornecedor</li>
+                    <li><strong>Saida (Delivery):</strong> Expedicao para cliente</li>
+                    <li><strong>Transferencia Interna:</strong> Movimentacao entre locais</li>
+                    <li><strong>Devolucao de Cliente:</strong> Retorno de mercadoria</li>
+                    <li><strong>Devolucao para Fornecedor:</strong> Retorno ao fornecedor</li>
+                </ul>
+            </li>
+            <li>Para cada operacao, verifique:
+                <ul>
+                    <li><strong>Tipo:</strong> Entrada, Saida ou Interna</li>
+                    <li><strong>Local de Origem:</strong> De onde vem</li>
+                    <li><strong>Local de Destino:</strong> Para onde vai</li>
+                    <li><strong>Regra de Reserva:</strong> Como reserva estoque</li>
+                </ul>
+            </li>
+        </ol>
+        <div class="alert alert-info">
+            <span class="alert-icon">i</span>
+            <span><strong>Importante:</strong> As operacoes de estoque definem como os produtos se movimentam entre locais. Configure corretamente para evitar erros de estoque.</span>
+        </div>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 1.3 — Configurar Regras de Reabastecimento</h4>
+        <div class="menu-path">Estoque > Configuracoes > Regras de Reabastecimento</div>
+        <ol>
+            <li>Para cada produto critico, configure:
+                <ul>
+                    <li><strong>Ponto de Pedido:</strong> Nivel minimo para gerar alerta</li>
+                    <li><strong>Quantidade Alvo:</strong> Quantidade ideal em estoque</li>
+                    <li><strong>Fornecedor Padrao:</strong> Quem fornecera</li>
+                    <li><strong>Lead Time:</strong> Tempo de reposicao em dias</li>
+                </ul>
+            </li>
+            <li>O sistema gera sugestoes de compra automaticamente</li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 1.4 — Configurar Unidades de Medida</h4>
+        <div class="menu-path">Configuracoes > Geral > Unidades de Medida</div>
+        <ol>
+            <li>Verifique as UMs padrao:
+                <ul>
+                    <li><strong>un:</strong> Unidade</li>
+                    <li><strong>kg:</strong> Quilograma</li>
+                    <li><strong>l:</strong> Litro</li>
+                    <li><strong>m:</strong> Metro</li>
+                    <li><strong>m2:</strong> Metro Quadrado</li>
+                    <li><strong>m3:</strong> Metro Cubico</li>
+                </ul>
+            </li>
+            <li>Configure conversoes:
+                <ul>
+                    <li><strong>Caixa:</strong> 1 caixa = 12 unidades</li>
+                    <li><strong>Fardo:</strong> 1 fardo = 24 unidades</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<!-- ==================== ENTRADA ==================== -->
+<div class="section" id="entrada">
+    <h2><span class="icon">2</span> Parte 2: Fluxo de Entrada (Recebimento)</h2>
+
+    <div class="step">
+        <h4>Etapa 2.1 — Receber Mercadoria do Fornecedor</h4>
+        <div class="menu-path">Estoque > Operacoes > Recebimentos</div>
+        <ol>
+            <li>Abra a transferencia de recebimento</li>
+            <li>Quando a mercadoria chegar:
+                <ul>
+                    <li>Verifique a quantidade recebida</li>
+                    <li>Verifique a qualidade</li>
+                    <li>Se houver divergencia:
+                        <ul>
+                            <li><strong>Quantidade menor:</strong> Receba apenas o que chegou</li>
+                            <li><strong>Quantidade maior:</strong> Receba apenas o que foi pedido</li>
+                            <li><strong>Produto errado:</strong> Rejeite e notifique o fornecedor</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Clique em <strong>"Validar"</strong></li>
+            <li>O sistema baixa o estoque automaticamente</li>
+        </ol>
+        <div class="alert alert-success">
+            <span class="alert-icon">OK</span>
+            <span><strong>O que acontece:</strong> Produto entra no estoque → Custo atualizado → Documento fiscal de entrada registrado.</span>
+        </div>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 2.2 — Verificar Movimentacoes</h4>
+        <div class="menu-path">No Historico de Movimentacoes</div>
+        <ol>
+            <li>Apos validar, verifique as movimentacoes criadas:
+                <ul>
+                    <li><strong>Entrada:</strong> Produto entra no estoque</li>
+                    <li><strong>Custo:</strong> Valor do produto atualizado</li>
+                    <li><strong>Documento Fiscal:</strong> NF-e de entrada registrada</li>
+                </ul>
+            </li>
+            <li>Confirme que o estoque esta correto</li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 2.3 — Processar Devolucao de Cliente</h4>
+        <div class="menu-path">Estoque > Operacoes > Devolucoes</div>
+        <ol>
+            <li>Abra a devolucao do cliente</li>
+            <li>Verifique:
+                <ul>
+                    <li><strong>Produto:</strong> Correto</li>
+                    <li><strong>Quantidade:</strong> Conforme devolvido</li>
+                    <li><strong>Motivo:</strong> Registrado</li>
+                </ul>
+            </li>
+            <li>Valide a devolucao</li>
+            <li>O sistema:
+                <ul>
+                    <li>Devolve o produto ao estoque</li>
+                    <li>Cria movimentacao de entrada</li>
+                    <li>Gera documento fiscal (se aplicavel)</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<!-- ==================== SAIDA ==================== -->
+<div class="section" id="saida">
+    <h2><span class="icon">3</span> Parte 3: Fluxo de Saida (Expedicao)</h2>
+
+    <div class="step">
+        <h4>Etapa 3.1 — Preparar Pedido para Expedicao</h4>
+        <div class="menu-path">Estoque > Operacoes > Expedicoes</div>
+        <ol>
+            <li>Abra a expedicao do pedido de venda</li>
+            <li>Verifique:
+                <ul>
+                    <li><strong>Produtos:</strong> Todos os itens do pedido</li>
+                    <li><strong>Quantidades:</strong> Conforme pedido</li>
+                    <li><strong>Endereco de Entrega:</strong> Correto</li>
+                </ul>
+            </li>
+            <li>Se necessario, imprima a <strong>lista de separacao</strong></li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 3.2 — Separar os Produtos (Picking)</h4>
+        <div class="menu-path">Na Expedicao</div>
+        <ol>
+            <li>Va ao estoque e separe os produtos</li>
+            <li>Para cada produto:
+                <ul>
+                    <li>Confirme a quantidade</li>
+                    <li>Verifique o lote (se aplicavel)</li>
+                    <li>Registre a separacao no sistema</li>
+                </ul>
+            </li>
+            <li>Quando tudo estiver separado:
+                <ul>
+                    <li>Clique em <strong>"Validar"</strong></li>
+                    <li>Confirme a quantidade expedida</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 3.3 — Expedir a Mercadoria</h4>
+        <div class="menu-path">Apos validar a expedicao</div>
+        <ol>
+            <li>O sistema:
+                <ul>
+                    <li>Baixa o estoque</li>
+                    <li>Cria movimentacao de saida</li>
+                    <li>Gera documento fiscal (se aplicavel)</li>
+                </ul>
+            </li>
+            <li>Prepare a mercadoria para envio:
+                <ul>
+                    <li>Embal adequadamente</li>
+                    <li>Coloque a NF-e/DANFE junto</li>
+                    <li>Registre o rastreamento (se aplicavel)</li>
+                </ul>
+            </li>
+        </ol>
+        <div class="alert alert-success">
+            <span class="alert-icon">OK</span>
+            <span><strong>O que acontece:</strong> Estoque e baixado → Movimentacao de saida criada → NF-e gerada → Mercadoria expedida.</span>
+        </div>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 3.4 — Processar Devolucao para Fornecedor</h4>
+        <div class="menu-path">Estoque > Operacoes > Devolucoes</div>
+        <ol>
+            <li>Abra a devolucao para o fornecedor</li>
+            <li>Verifique:
+                <ul>
+                    <li><strong>Produto:</strong> Correto</li>
+                    <li><strong>Quantidade:</strong> Conforme devolvido</li>
+                    <li><strong>Motivo:</strong> Registrado</li>
+                </ul>
+            </li>
+            <li>Valide a devolucao</li>
+            <li>O sistema:
+                <ul>
+                    <li>Remove o produto do estoque</li>
+                    <li>Cria movimentacao de saida</li>
+                    <li>Gera documento fiscal de devolucao</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<!-- ==================== TRANSFERENCIA ==================== -->
+<div class="section" id="transferencia">
+    <h2><span class="icon">4</span> Parte 4: Transferencias Internas</h2>
+
+    <div class="step">
+        <h4>Etapa 4.1 — Criar Transferencia Interna</h4>
+        <div class="menu-path">Estoque > Operacoes > Transferencias Internas</div>
+        <ol>
+            <li>Clique em <strong>"Criar"</strong></li>
+            <li>Informe:
+                <ul>
+                    <li><strong>Origem:</strong> Local de saida</li>
+                    <li><strong>Destino:</strong> Local de entrada</li>
+                    <li><strong>Produtos:</strong> Itens a transferir</li>
+                    <li><strong>Quantidades:</strong> Quantidades desejadas</li>
+                </ul>
+            </li>
+            <li>Confirme</li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 4.2 — Validar Transferencia</h4>
+        <div class="menu-path">Na Transferencia</div>
+        <ol>
+            <li>Va ao local de origem e separe os itens</li>
+            <li>Confirme as quantidades</li>
+            <li>Clique em <strong>"Validar"</strong></li>
+            <li>O sistema:
+                <ul>
+                    <li>Remove do local de origem</li>
+                    <li>Adiciona ao local de destino</li>
+                    <li>Cria movimentacao interna</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 4.3 — Transferencia entre Filiais</h4>
+        <div class="menu-path">Estoque > Operacoes > Transferencias</div>
+        <ol>
+            <li>Para transferir entre filiais:
+                <ul>
+                    <li>Crie uma transferencia</li>
+                    <li>Informe a filial de origem e destino</li>
+                    <li>O sistema cria a saida na filial origem</li>
+                    <li>E a entrada na filial destino</li>
+                </ul>
+            </li>
+            <li>Cada filial emite sua NF-e (se aplicavel)</li>
+        </ol>
+    </div>
+</div>
+
+<!-- ==================== INVENTARIO ==================== -->
+<div class="section" id="inventario">
+    <h2><span class="icon">5</span> Parte 5: Inventario e Contagem</h2>
+
+    <div class="step">
+        <h4>Etapa 5.1 — Criar Inventario</h4>
+        <div class="menu-path">Estoque > Operacoes > Inventarios</div>
+        <ol>
+            <li>Clique em <strong>"Criar"</strong></li>
+            <li>Informe:
+                <ul>
+                    <li><strong>Local:</strong> Local a inventariar</li>
+                    <li><strong>Produtos:</strong> Itens a contar (ou todos)</li>
+                </ul>
+            </li>
+            <li>Confirme</li>
+            <li>O sistema cria as linhas de inventario</li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 5.2 — Realizar Contagem</h4>
+        <div class="menu-path">No Inventario</div>
+        <ol>
+            <li>Va ao local e conte os produtos</li>
+            <li>Para cada produto:
+                <ul>
+                    <li>Registre a <strong>quantidade contada</strong></li>
+                    <li>Se diferente do sistema:
+                        <ul>
+                            <li><strong>Maior:</strong> Informe a quantidade real</li>
+                            <li><strong>Menor:</strong> Informe a quantidade real</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Quando tudo estiver contado, clique em <strong>"Validar"</strong></li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 5.3 — Ajustar Diferencas</h4>
+        <div class="menu-path">Apos validar o inventario</div>
+        <ol>
+            <li>O sistema cria movimentacoes de ajuste:
+                <ul>
+                    <li><strong>Se faltou:</strong> Movimentacao de saida</li>
+                    <li><strong>Se sobrou:</strong> Movimentacao de entrada</li>
+                </ul>
+            </li>
+            <li>Verifique se as diferencas estao justificadas</li>
+            <li>Registre os motivos das diferencas</li>
+        </ol>
+        <div class="alert alert-warning">
+            <span class="alert-icon">!</span>
+            <span><strong>Atencao:</strong> Inventario movimenta estoque e custos. So realize quando tiver certeza das quantidades reais.</span>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== LOTES ==================== -->
+<div class="section" id="lotes">
+    <h2><span class="icon">6</span> Parte 6: Lotes e Numeros de Serie</h2>
+
+    <div class="step">
+        <h4>Etapa 6.1 — Configurar Rastreamento por Lote</h4>
+        <div class="menu-path">No Produto > Aba "Estoque"</div>
+        <ol>
+            <li>Configure o rastreamento:
+                <ul>
+                    <li><strong>Rastreamento por Lote:</strong> Ativado</li>
+                    <li><strong>Rastreamento por Numero de Serie:</strong> Se aplicavel</li>
+                    <li><strong>Geracao de Lote:</strong> Automatico ou Manual</li>
+                </ul>
+            </li>
+            <li>Para cada movimentacao, o sistema exige o lote</li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 6.2 — Registrar Lote na Entrada</h4>
+        <div class="menu-path">Na Transferencia de Recebimento</div>
+        <ol>
+            <li>Ao receber produto com rastreabilidade:
+                <ul>
+                    <li>Informe o <strong>numero do lote</strong> do fornecedor</li>
+                    <li>Informe a <strong>data de validade</strong> (se aplicavel)</li>
+                    <li>Informe o <strong>fabricante</strong> (se aplicavel)</li>
+                </ul>
+            </li>
+            <li>Valide a transferencia</li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 6.3 — Consultar Rastreabilidade</h4>
+        <div class="menu-path">Estoque > Rastreabilidade</div>
+        <ol>
+            <li>Consulte o historico de um lote:
+                <ul>
+                    <li><strong>Entrada:</strong> Quando e de quem recebeu</li>
+                    <li><strong>Saida:</strong> Quando e para quem enviou</li>
+                    <li><strong>Estoque Atual:</strong> Onde esta agora</li>
+                </ul>
+            </li>
+            <li>Util para auditorias e recall de produtos</li>
+        </ol>
+    </div>
+</div>
+
+<!-- ==================== ERROS ==================== -->
+<div class="section" id="erros">
+    <h2><span class="icon">!</span> Parte 7: Erros Comuns e Solucoes</h2>
+
+    <table>
+        <tr><th>Erro</th><th>Causa</th><th>Solucao</th></tr>
+        <tr><td><strong>Estoque negativo</strong></td><td>Saida maior que entrada</td><td>Verificar movimentacoes e corrigir</td></tr>
+        <tr><td><strong>Lote nao encontrado</strong></td><td>Lote nao cadastrado</td><td>Cadastrar lote na entrada</td></tr>
+        <tr><td><strong>Quantidade errada</strong></td><td>Contagem incorreta</td><td>Realizar inventario</td></tr>
+        <tr><td><strong>Local errado</strong></td><td>Produto em local incorreto</td><td>Transferir para local correto</td></tr>
+        <tr><td><strong>Custo errado</strong></td><td>Preco de compra nao atualizado</td><td>Verificar notas fiscais de entrada</td></tr>
+        <tr><td><strong>Rastreabilidade incompleta</strong></td><td>Lote nao registrado</td><td>Registrar lote na movimentacao</td></tr>
+    </table>
+</div>
+
+<!-- ==================== MODULOS ==================== -->
+<div class="section" id="modulos">
+    <h2><span class="icon">M</span> Modulos Envolvidos</h2>
+
+    <div class="modules-grid">
+        <div class="module-card"><code>stock</code><p>Gestao de estoque, transferencias, inventario</p></div>
+        <div class="module-card"><code>stock_account</code><p>Integracao com contabilidade (custos)</p></div>
+        <div class="module-card"><code>l10n_br_stock</code><p>Integracao com operacoes fiscais brasileiras</p></div>
+        <div class="module-card"><code>l10n_br_stock_account</code><p>Integracao estoque + contabilidade + fiscal</p></div>
+        <div class="module-card"><code>stock_picking_batch</code><p>Expedicao em lote (batch picking)</p></div>
+        <div class="module-card"><code>stock_landed_costs</code><p>Custos de importacao e frete</p></div>
+        <div class="module-card"><code>stock_lots</code><p>Gestao de lotes e numeros de serie</p></div>
+    </div>
+
+    <h3>Quando usar cada modulo</h3>
+    <table>
+        <tr><th>Modulo</th><th>Quando Usado</th></tr>
+        <tr><td><code>stock</code></td><td>Gestao de estoque, transferencias, inventario</td></tr>
+        <tr><td><code>stock_account</code></td><td>Integracao com contabilidade (custos)</td></tr>
+        <tr><td><code>l10n_br_stock</code></td><td>Integracao com operacoes fiscais brasileiras</td></tr>
+        <tr><td><code>l10n_br_stock_account</code></td><td>Integracao estoque + contabilidade + fiscal</td></tr>
+        <tr><td><code>stock_picking_batch</code></td><td>Expedicao em lote (batch picking)</td></tr>
+        <tr><td><code>stock_landed_costs</code></td><td>Custos de importacao e frete</td></tr>
+        <tr><td><code>stock_lots</code></td><td>Gestao de lotes e numeros de serie</td></tr>
+    </table>
+</div>
+
+</div>
+
+<div class="footer">
+    <p>Treinamento baseado na documentacao dd-modulos Odoo 16 — Localizacao Brasileira OCA</p>
+    <p>EGD — Escodoo</p>
+</div>
+
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            primaryColor: '#714B67',
+            primaryTextColor: '#fff',
+            primaryBorderColor: '#5A3A52',
+            lineColor: '#9C6B8E',
+            secondaryColor: '#F3E8EE',
+            tertiaryColor: '#FAF8F9',
+            fontFamily: 'Segoe UI, system-ui, sans-serif'
+        },
+        flowchart: { curve: 'basis', padding: 15 }
+    });
+</script>
+
+</body>
+</html>

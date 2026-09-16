@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulos Odoo 16 - EGD</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 15mm;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .cover {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #714B67 0%, #8B5A83 100%);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            page-break-after: always;
+        }
+        .cover h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .cover h2 {
+            font-size: 1.5em;
+            font-weight: normal;
+            opacity: 0.9;
+        }
+        .cover .date {
+            margin-top: 40px;
+            font-size: 1.1em;
+            opacity: 0.8;
+        }
+        h1 {
+            color: #714B67;
+            border-bottom: 3px solid #714B67;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            page-break-before: always;
+        }
+        h2 {
+            color: #8B5A83;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #555;
+            margin-top: 20px;
+        }
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #714B67;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+        .highlight {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .badge-high { background: #dc3545; color: white; }
+        .badge-medium { background: #ffc107; color: #333; }
+        .badge-low { background: #28a745; color: white; }
+        .toc {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .toc h2 {
+            margin-top: 0;
+        }
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .toc li {
+            padding: 8px 0;
+            border-bottom: 1px dotted #ccc;
+        }
+        .stat-box {
+            display: inline-block;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 10px;
+            text-align: center;
+            min-width: 150px;
+        }
+        .stat-box .number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #714B67;
+        }
+        .stat-box .label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .area-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .area-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid #714B67;
+        }
+        .area-card h4 {
+            margin-top: 0;
+            color: #714B67;
+        }
+        .area-card .count {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #8B5A83;
+        }
+        @media print {
+            body {
+                background: white;
+            }
+            .section {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            .cover {
+                page-break-after: always;
+            }
+            h1 {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- CAPA -->
+<div class="cover">
+    <h1>Módulos Odoo 16</h1>
+    <h2>Inventário Completo - EGD</h2>
+    <div class="date">Setembro 2026</div>
+</div>
+
+<!-- SUMARIO -->
+<div class="toc">
+    <h2>Sumário</h2>
+    <ul>
+        <li><strong>1.</strong> Visão Geral</li>
+        <li><strong>2.</strong> Áreas Funcionais</li>
+        <li><strong>3.</strong> Módulos por Área</li>
+        <li><strong>4.</strong> Customizações Escodoo</li>
+        <li><strong>5.</strong> Localização Brasileira</li>
+        <li><strong>6.</strong> Resumo e Próximos Passos</li>
+    </ul>
+</div>
+
+<!-- SECAO 1: VISAO GERAL -->
+<h1>1. Visão Geral</h1>
+
+<div class="section">
+    <h2>Resumo do Ambiente</h2>
+    
+    <div style="text-align: center; margin: 30px 0;">
+        <div class="stat-box">
+            <div class="number">261</div>
+            <div class="label">Total de Módulos</div>
+        </div>
+        <div class="stat-box">
+            <div class="number">76</div>
+            <div class="label">Odoo S.A.</div>
+        </div>
+        <div class="stat-box">
+            <div class="number">47</div>
+            <div class="label">Escodoo</div>
+        </div>
+        <div class="stat-box">
+            <div class="number">138</div>
+            <div class="label">OCA</div>
+        </div>
+    </div>
+
+    <table>
+        <tr>
+            <th>Componente</th>
+            <th>Versão</th>
+        </tr>
+        <tr>
+            <td>Odoo</td>
+            <td>16.0</td>
+        </tr>
+        <tr>
+            <td>PostgreSQL</td>
+            <td>14+</td>
+        </tr>
+        <tr>
+            <td>Total de Módulos</td>
+            <td>261 instalados</td>
+        </tr>
+    </table>
+</div>
+
+<!-- SECAO 2: AREAS FUNCIONAIS -->
+<h1>2. Áreas Funcionais</h1>
+
+<div class="section">
+    <h2>Distribuição por Área</h2>
+    
+    <div class="area-grid">
+        <div class="area-card">
+            <h4>Localização Brasileira</h4>
+            <div class="count">43 módulos</div>
+            <p>NF-e, NFS-e, CNAB, fiscal</p>
+        </div>
+        <div class="area-card">
+            <h4>Contabilidade</h4>
+            <div class="count">34 módulos</div>
+            <p>Faturação, relatórios, EDI</p>
+        </div>
+        <div class="area-card">
+            <h4>RH</h4>
+            <div class="count">24 módulos</div>
+            <p>Funcionários, contratos, ponto</p>
+        </div>
+        <div class="area-card">
+            <h4>Base/Core</h4>
+            <div class="count">25 módulos</div>
+            <p>Autenticação, contactos, base</p>
+        </div>
+        <div class="area-card">
+            <h4>Compras</h4>
+            <div class="count">15 módulos</div>
+            <p>RFQ, requisições, contratos</p>
+        </div>
+        <div class="area-card">
+            <h4>Vendas</h4>
+            <div class="count">13 módulos</div>
+            <p>Cotações, pedidos, blanket orders</p>
+        </div>
+        <div class="area-card">
+            <h4>Estoque</h4>
+            <div class="count">13 módulos</div>
+            <p>Transferências, inventário</p>
+        </div>
+        <div class="area-card">
+            <h4>Web/UI</h4>
+            <div class="count">16 módulos</div>
+            <p>Interface, dashboards, planilhas</p>
+        </div>
+        <div class="area-card">
+            <h4>Relatórios</h4>
+            <div class="count">12 módulos</div>
+            <p>MIS Builder, BI, relatórios</p>
+        </div>
+        <div class="area-card">
+            <h4>Frota</h4>
+            <div class="count">6 módulos</div>
+            <p>Veículos, inspeções, seguro</p>
+        </div>
+        <div class="area-card">
+            <h4>Manufacturing</h4>
+            <div class="count">6 módulos</div>
+            <p>Produção, qualidade, MRP</p>
+        </div>
+    </div>
+</div>
+
+<!-- SECAO 3: MODULOS POR AREA -->
+<h1>3. Módulos por Área</h1>
+
+<div class="section">
+    <h2>Localização Brasileira (43 módulos)</h2>
+    
+    <table>
+        <tr>
+            <th>Módulo</th>
+            <th>Função</th>
+        </tr>
+        <tr>
+            <td>l10n_br_fiscal</td>
+            <td>Módulo fiscal base</td>
+        </tr>
+        <tr>
+            <td>l10n_br_nfe</td>
+            <td>Nota Fiscal Eletrônica</td>
+        </tr>
+        <tr>
+            <td>l10n_br_nfse</td>
+            <td>Nota Fiscal de Serviço</td>
+        </tr>
+        <tr>
+            <td>l10n_br_cnab_structure</td>
+            <td>Comunicação bancária CNAB</td>
+        </tr>
+        <tr>
+            <td>l10n_br_account</td>
+            <td>Contabilidade brasileira</td>
+        </tr>
+        <tr>
+            <td>l10n_br_stock_account</td>
+            <td>Estoque e contabilidade</td>
+        </tr>
+        <tr>
+            <td>l10n_br_purchase</td>
+            <td>Compras brasileiras</td>
+        </tr>
+        <tr>
+            <td>l10n_br_sale</td>
+            <td>Vendas brasileiras</td>
+        </tr>
+        <tr>
+            <td>l10n_br_hr</td>
+            <td>RH brasileiro</td>
+        </tr>
+        <tr>
+            <td>l10n_br_mis_report</td>
+            <td>Balanço e DRE</td>
+        </tr>
+    </table>
+    
+    <div class="highlight">
+        <strong>Total:</strong> 43 módulos para atender toda a legislação fiscal brasileira
+    </div>
+</div>
+
+<div class="section">
+    <h2>Contabilidade (34 módulos)</h2>
+    
+    <table>
+        <tr>
+            <th>Módulo</th>
+            <th>Função</th>
+        </tr>
+        <tr>
+            <td>account</td>
+            <td>Base de contabilidade</td>
+        </tr>
+        <tr>
+            <td>account_financial_report</td>
+            <td>Relatórios financeiros</td>
+        </tr>
+        <tr>
+            <td>account_payment_order</td>
+            <td>Ordens de pagamento</td>
+        </tr>
+        <tr>
+            <td>account_statement_import_file</td>
+            <td>Importação de extratos</td>
+        </tr>
+        <tr>
+            <td>account_reconcile_oca</td>
+            <td>Conciliação bancária</td>
+        </tr>
+        <tr>
+            <td>analytic</td>
+            <td>Contabilidade analítica</td>
+        </tr>
+    </table>
+    
+    <div class="highlight">
+        <strong>Destaque:</strong> Nova arquitetura analítica na v16 com Analytic Distribution
+    </div>
+</div>
+
+<div class="section">
+    <h2>RH (24 módulos)</h2>
+    
+    <table>
+        <tr>
+            <th>Módulo</th>
+            <th>Função</th>
+        </tr>
+        <tr>
+            <td>hr</td>
+            <td>Gestão de funcionários</td>
+        </tr>
+        <tr>
+            <td>hr_contract</td>
+            <td>Contratos de trabalho</td>
+        </tr>
+        <tr>
+            <td>hr_timesheet</td>
+            <td>Controle de horas</td>
+        </tr>
+        <tr>
+            <td>hr_expense</td>
+            <td>Gestão de despesas</td>
+        </tr>
+        <tr>
+            <td>hr_employee_ppe</td>
+            <td>Gestão de EPIs (Escodoo)</td>
+        </tr>
+        <tr>
+            <td>hr_course</td>
+            <td>Treinamentos</td>
+        </tr>
+    </table>
+</div>
+
+<!-- SECAO 4: CUSTOMIZACOES ESCODOO -->
+<h1>4. Customizações Escodoo</h1>
+
+<div class="section">
+    <h2>Módulos Customizados (47)</h2>
+    
+    <table>
+        <tr>
+            <th>Área</th>
+            <th>Módulos</th>
+            <th>Principais Customizações</th>
+        </tr>
+        <tr>
+            <td>Contabilidade</td>
+            <td>6</td>
+            <td>Regime de caixa, restrições analíticas</td>
+        </tr>
+        <tr>
+            <td>Compras</td>
+            <td>6</td>
+            <td>Termos padrão, qualidade de fornecedores</td>
+        </tr>
+        <tr>
+            <td>Vendas</td>
+            <td>3</td>
+            <td>Blanket orders, restrições analíticas</td>
+        </tr>
+        <tr>
+            <td>Estoque</td>
+            <td>4</td>
+            <td>Transferências, faturamento customizado</td>
+        </tr>
+        <tr>
+            <td>RH</td>
+            <td>5</td>
+            <td>CNH, EPIs, apontamento de horas</td>
+        </tr>
+        <tr>
+            <td>Frota</td>
+            <td>8</td>
+            <td>IPVA, seguro, inspeções, etanol</td>
+        </tr>
+        <tr>
+            <td>Localização BR</td>
+            <td>11</td>
+            <td>CNAB, NFS-e Focus, importação</td>
+        </tr>
+        <tr>
+            <td>Relatórios</td>
+            <td>5</td>
+            <td>Fluxo de caixa por área</td>
+        </tr>
+    </table>
+    
+    <div class="highlight">
+        <strong>Destaques Escodoo:</strong>
+        <ul>
+            <li>Gestão de validade de CNH, IPVA e seguro de veículos</li>
+            <li>Controle de EPIs (Equipamentos de Proteção Individual)</li>
+            <li>Integração com FocusNFE para NFS-e</li>
+            <li>Previsão de fluxo de caixa por contrato, compra e venda</li>
+        </ul>
+    </div>
+</div>
+
+<!-- SECAO 5: LOCALIZACAO BRASILEIRA -->
+<h1>5. Localização Brasileira</h1>
+
+<div class="section">
+    <h2>Documentos Fiscais Eletrônicos</h2>
+    
+    <table>
+        <tr>
+            <th>Documento</th>
+            <th>Módulo</th>
+            <th>Descrição</th>
+        </tr>
+        <tr>
+            <td>NF-e</td>
+            <td>l10n_br_nfe</td>
+            <td>Nota Fiscal Eletrônica (produtos)</td>
+        </tr>
+        <tr>
+            <td>NFC-e</td>
+            <td>l10n_br_nfe</td>
+            <td>Nota Fiscal ao Consumidor</td>
+        </tr>
+        <tr>
+            <td>NFS-e</td>
+            <td>l10n_br_nfse</td>
+            <td>Nota Fiscal de Serviço</td>
+        </tr>
+        <tr>
+            <td>CNAB</td>
+            <td>l10n_br_cnab_structure</td>
+            <td>Comunicação bancária</td>
+        </tr>
+    </table>
+</div>
+
+<div class="section">
+    <h2>Integrações</h2>
+    
+    <table>
+        <tr>
+            <th>Integração</th>
+            <th>Módulo</th>
+        </tr>
+        <tr>
+            <td>FocusNFE</td>
+            <td>l10n_br_nfse_focus</td>
+        </tr>
+        <tr>
+            <td>Consulta CNPJ</td>
+            <td>l10n_br_cnpj_search</td>
+        </tr>
+        <tr>
+            <td>Consulta IE</td>
+            <td>l10n_br_ie_search</td>
+        </tr>
+        <tr>
+            <td>Certificado A1</td>
+            <td>l10n_br_fiscal_certificate</td>
+        </tr>
+    </table>
+</div>
+
+<!-- SECAO 6: RESUMO -->
+<h1>6. Resumo e Próximos Passos</h1>
+
+<div class="section">
+    <h2>Principais Áreas Cobertas</h2>
+    
+    <table>
+        <tr>
+            <th>Área</th>
+            <th>Status</th>
+            <th>Observação</th>
+        </tr>
+        <tr>
+            <td>Contabilidade</td>
+            <td><span class="badge badge-low">Completo</span></td>
+            <td>34 módulos incluindo relatórios</td>
+        </tr>
+        <tr>
+            <td>Compras</td>
+            <td><span class="badge badge-low">Completo</span></td>
+            <td>15 módulos com requisições</td>
+        </tr>
+        <tr>
+            <td>Estoque</td>
+            <td><span class="badge badge-low">Completo</span></td>
+            <td>13 módulos com stock request</td>
+        </tr>
+        <tr>
+            <td>Vendas</td>
+            <td><span class="badge badge-low">Completo</span></td>
+            <td>13 módulos com blanket orders</td>
+        </tr>
+        <tr>
+            <td>RH</td>
+            <td><span class="badge badge-low">Completo</span></td>
+            <td>24 módulos incluindo EPIs</td>
+        </tr>
+        <tr>
+            <td>Localização BR</td>
+            <td><span class="badge badge-low">Completo</span></td>
+            <td>43 módulos fiscais</td>
+        </tr>
+        <tr>
+            <td>Frota</td>
+            <td><span class="badge badge-low">Completo</span></td>
+            <td>6 módulos com inspeções</td>
+        </tr>
+        <tr>
+            <td>Manufacturing</td>
+            <td><span class="badge badge-low">Completo</span></td>
+            <td>6 módulos com qualidade</td>
+        </tr>
+    </table>
+</div>
+
+<div class="section">
+    <h2>Próximos Passos</h2>
+    
+    <ul>
+        <li><strong>Consultoria:</strong> Revisar configurações por área</li>
+        <li><strong>Treinamento:</strong> Capacitar usuários nas funcionalidades</li>
+        <li><strong>Personalização:</strong> Ajustar módulos Escodoo conforme necessidade</li>
+        <li><strong>Relatórios:</strong> Configurar MIS Builder e relatórios</li>
+    </ul>
+    
+    <div class="highlight">
+        <strong>Contato Escodoo:</strong> Para dúvidas sobre as customizações ou configurações, entre em contato com a equipe Escodoo.
+    </div>
+</div>
+
+<div style="text-align: center; padding: 40px; color: #666;">
+    <p>Documento gerado em Setembro 2026</p>
+    <p>Data Dictionary completo disponível em: <code>docsia/dd-modulos/</code></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treinamento NF-e — Odoo 16 | EGD</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        :root{--primary:#714B67;--primary-light:#8B6B7F;--primary-dark:#5A3A52;--accent:#9C6B8E;--bg:#FAF8F9;--card:#FFF;--text:#2D2327;--text-light:#6B5E63;--border:#E8E0E4;--success:#2E7D32;--warning:#F57C00;--error:#C62828;--info:#1565C0;--code-bg:#F5F0F2;--shadow:0 2px 12px rgba(113,75,103,.08)}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+        .hero{background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 50%,var(--accent) 100%);color:#fff;padding:3rem 2rem;text-align:center;position:relative;overflow:hidden}
+        .hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%)}
+        .hero h1{font-size:2.2rem;font-weight:700;margin-bottom:.5rem;position:relative}
+        .hero p{font-size:1.1rem;opacity:.9;position:relative}
+        .hero .badge{display:inline-block;background:rgba(255,255,255,.2);padding:.3rem 1rem;border-radius:20px;font-size:.85rem;margin-top:1rem;position:relative}
+        .nav{background:var(--card);border-bottom:1px solid var(--border);padding:1rem 2rem;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
+        .nav-inner{max-width:1100px;margin:0 auto;display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+        .nav a{text-decoration:none;color:var(--text-light);padding:.4rem .9rem;border-radius:6px;font-size:.85rem;font-weight:500;transition:all .2s}
+        .nav a:hover{background:var(--primary);color:#fff}
+        .container{max-width:1100px;margin:0 auto;padding:2rem}
+        .section{background:var(--card);border-radius:12px;padding:2rem;margin-bottom:2rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+        .section h2{font-size:1.5rem;color:var(--primary);margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:2px solid var(--primary);display:flex;align-items:center;gap:.5rem}
+        .section h2 .icon{width:32px;height:32px;background:var(--primary);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+        .section h3{font-size:1.15rem;color:var(--text);margin:1.5rem 0 .75rem;padding-left:.5rem;border-left:3px solid var(--accent)}
+        .step{background:var(--bg);border-radius:10px;padding:1.25rem;margin:1rem 0;border-left:4px solid var(--primary);position:relative}
+        .step h4{color:var(--primary-dark);margin-bottom:.5rem;font-size:1rem}
+        .step .menu-path{display:inline-block;background:var(--code-bg);padding:.2rem .6rem;border-radius:4px;font-family:'Cascadia Code','Fira Code',monospace;font-size:.8rem;color:var(--primary);margin-bottom:.5rem;border:1px solid var(--border)}
+        .step ol,.step ul{padding-left:1.5rem;margin:.5rem 0}
+        .step li{margin:.3rem 0;font-size:.95rem}
+        .step li strong{color:var(--primary-dark)}
+        .alert{padding:.75rem 1rem;border-radius:8px;margin:.75rem 0;font-size:.9rem;display:flex;align-items:flex-start;gap:.5rem}
+        .alert-info{background:#E3F2FD;border-left:4px solid var(--info);color:#0D47A1}
+        .alert-warning{background:#FFF3E0;border-left:4px solid var(--warning);color:#E65100}
+        .alert-success{background:#E8F5E9;border-left:4px solid var(--success);color:#1B5E20}
+        .alert-error{background:#FFEBEE;border-left:4px solid var(--error);color:#B71C1C}
+        table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+        th{background:var(--primary);color:#fff;padding:.6rem .8rem;text-align:left;font-weight:600}
+        td{padding:.5rem .8rem;border-bottom:1px solid var(--border)}
+        tr:nth-child(even){background:var(--bg)}
+        tr:hover{background:#F3E8EE}
+        .mermaid{background:#fff;border-radius:10px;padding:1.5rem;margin:1rem 0;text-align:center;overflow-x:auto;border:1px solid var(--border)}
+        .mermaid-title{font-weight:600;color:var(--primary);margin-bottom:.75rem;font-size:.95rem}
+        .checklist{list-style:none;padding:0}
+        .checklist li{padding:.4rem 0;padding-left:1.8rem;position:relative;font-size:.9rem}
+        .checklist li::before{content:'☐';position:absolute;left:0;color:var(--primary);font-size:1rem}
+        .modules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;margin:1rem 0}
+        .module-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.75rem;font-size:.85rem}
+        .module-card code{background:var(--primary);color:#fff;padding:.15rem .4rem;border-radius:3px;font-size:.75rem}
+        .module-card p{color:var(--text-light);margin-top:.25rem;font-size:.8rem}
+        .footer{text-align:center;padding:2rem;color:var(--text-light);font-size:.85rem;border-top:1px solid var(--border);margin-top:2rem}
+        @media(max-width:768px){.hero h1{font-size:1.5rem}.container{padding:1rem}.section{padding:1.25rem}.nav a{font-size:.75rem;padding:.3rem .6rem}}
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>Treinamento: Emissao de NF-e</h1>
+    <p>Como emitir uma Nota Fiscal Eletronica no Odoo 16</p>
+    <div class="badge">Modulos: l10n_br_fiscal + l10n_br_nfe + l10n_br_account</div>
+</div>
+
+<div class="nav">
+    <div class="nav-inner">
+        <a href="#fluxos">Fluxos</a>
+        <a href="#config">Configuracao</a>
+        <a href="#emissao">Emissao</a>
+        <a href="#especial">Situacoes Especiais</a>
+        <a href="#erros">Erros</a>
+        <a href="#dicas">Dicas</a>
+        <a href="#modulos">Modulos</a>
+    </div>
+</div>
+
+<div class="container">
+
+<!-- ==================== FLUXOS ==================== -->
+<div class="section" id="fluxos">
+    <h2><span class="icon">~</span> Fluxos Visuais</h2>
+
+    <div class="mermaid-title">Fluxo Geral: Configuracao ate NF-e Autorizada</div>
+    <div class="mermaid">
+flowchart TD
+    START([Inicio]) --> CONFIG{Configuracao<br/>Inicial?}
+    CONFIG -->|Nao| P1[PARTE 1<br/>Configuracao]
+    CONFIG -->|Sim| P2[PARTE 2<br/>Emissao NF-e]
+    P1 --> C1[1.1 Empresa<br/>CNPJ + IE]
+    C1 --> C2[1.2 Certificado<br/>A1 Digital]
+    C2 --> C3[1.3 Operacao<br/>Fiscal]
+    C3 --> C4[1.4 Impostos<br/>ICMS + PIS + COFINS]
+    C4 --> C5[1.5 Parametros<br/>NF-e]
+    C5 --> P2
+    P2 --> V1[2.1 Criar Pedido<br/>de Venda]
+    V1 --> V2[2.2 Verificar<br/>Operacao Fiscal]
+    V2 --> V3[2.3 Confirmar<br/>Pedido]
+    V3 --> V4[2.4 Validar<br/>Transferencia]
+    V4 --> V5[2.5 Documento<br/>Fiscal Criado]
+    V5 --> V6[2.6 Revisar<br/>Impostos]
+    V6 --> ENV[Enviar NF-e<br/>para SEFAZ]
+    ENV --> R{Resposta<br/>SEFAZ?}
+    R -->|Autorizado| DANFE[Imprimir<br/>DANFE]
+    R -->|Rejeitado| CORR[Corrigir<br/>Erro]
+    R -->|Processando| CONS[Consultar<br/>Status]
+    CORR --> ENV
+    CONS --> ENV
+    DANFE --> FIM([FIM])
+    </div>
+
+    <div class="mermaid-title">Fluxo Detalhado: Documento Fiscal</div>
+    <div class="mermaid">
+flowchart LR
+    subgraph PEDIDO["1. PEDIDO DE VENDA"]
+        P1[Cliente + Produtos]
+        P2[Condicao Pagamento]
+        P3[Operacao Fiscal]
+        P4[Confirmar]
+    end
+    subgraph ESTOQUE["2. ESTOQUE"]
+        E1[Transferencia Criada]
+        E2[Verificar Disponibilidade]
+        E3[Validar / Baixar]
+    end
+    subgraph FISCAL["3. DOCUMENTO FISCAL"]
+        F1[Gerado Auto]
+        F2[Revisar Dados]
+        F3[Revisar Impostos]
+    end
+    subgraph SEFAZ["4. SEFAZ"]
+        S1[Gerar XML]
+        S2[Assinar Digital]
+        S3[Enviar]
+        S4{Autorizado?}
+    end
+    PEDIDO --> ESTOQUE --> FISCAL --> SEFAZ
+    S4 -->|Sim| DANFE[DANFE]
+    S4 -->|Nao| ERRO[Corrigir]
+    </div>
+
+    <div class="mermaid-title">Fluxo de Decisao: Tipo de Documento</div>
+    <div class="mermaid">
+flowchart TD
+    START([Operacao a ser feita]) --> Q1{Venda de<br/>mercadoria?}
+    Q1 -->|Sim| NF[NF-e<br/>CFOP 5.102]
+    Q1 -->|Nao| Q2{Prestacao<br/>de servico?}
+    Q2 -->|Sim| NFS[NFS-e<br/>CFOP 5.933]
+    Q2 -->|Nao| Q3{Devolucao<br/>de venda?}
+    Q3 -->|Sim| NFD[NF-e Devolucao<br/>CFOP 1.202]
+    Q3 -->|Nao| Q4{Transferencia<br/>entre filiais?}
+    Q4 -->|Sim| NFT[NF-e Transferencia<br/>CFOP 5.153]
+    Q4 -->|Nao| Q5{Remessa para<br/>comodato/demo?}
+    Q5 -->|Sim| NFR[NF-e Remessa<br/>CFOP 5.949]
+    Q5 -->|Nao| OUT[Consultar<br/>departamento fiscal]
+    </div>
+
+    <div class="mermaid-title">Fluxo de Erros e Correcoes</div>
+    <div class="mermaid">
+flowchart TD
+    ERRO([Erro no Envio]) --> TYPE{Tipo do Erro?}
+    TYPE -->|CNPJ invalido| E104[Rejeicao 104<br/>Verificar CNPJ<br/>no cadastro]
+    TYPE -->|IE invalida| E124[Rejeicao 124<br/>Verificar IE<br/>no cadastro]
+    TYPE -->|CFOP invalido| E238[Rejeicao 238<br/>Verificar<br/>operacao fiscal]
+    TYPE -->|Imposto errado| E252[Rejeicao 252<br/>Verificar<br/>calculo impostos]
+    TYPE -->|Certificado vencido| E574[Rejeicao 574<br/>Verificar<br/>validade A1]
+    TYPE -->|Chave invalida| E631[Rejeicao 631<br/>Verificar 44 digitos]
+    TYPE -->|Timeout| TO[SEFAZ sem<br/>resposta<br/>Aguardar + Consultar]
+    TYPE -->|XML malformado| XML[Contatar<br/>suporte tecnico]
+    E104 --> CORR[Corrigir Cadastro]
+    E124 --> CORR
+    E238 --> CORR
+    E252 --> CORR
+    E574 --> CERT[Atualizar<br/>Certificado]
+    E631 --> CORR
+    TO --> REENV[Reenviar]
+    CORR --> REENV
+    CERT --> REENV
+    REENV --> OK([NF-e Autorizada])
+    </div>
+
+    <div class="mermaid-title">Fluxo de Cancelamento</div>
+    <div class="mermaid">
+flowchart TD
+    START([NF-e Autorizada<br/>precisa cancelar]) --> Q1{Passou<br/>24 horas?}
+    Q1 -->|Sim| NAO[Nao pode cancelar<br/>Emitir NF-e<br/>de Devolucao]
+    Q1 -->|Nao| Q2{Mercadoria<br/>foi enviada?}
+    Q2 -->|Sim| NAO2[Nao pode cancelar<br/>Emitir NF-e<br/>de Devolucao]
+    Q2 -->|Nao| MOTIVO[Informar<br/>motivo min 15 chars]
+    MOTIVO --> SEFAZ[Enviar<br/>cancelamento<br/>SEFAZ]
+    SEFAZ --> RESP{Resposta<br/>SEFAZ?}
+    RESP -->|Aceito| OK([NF-e<br/>Cancelada])
+    RESP -->|Rejeitado| ERRO[Verificar<br/>motivo]
+    ERRO --> SEFAZ
+    </div>
+
+    <div class="mermaid-title">Fluxo de Integracao entre Modulos</div>
+    <div class="mermaid">
+flowchart LR
+    SALE[l10n_br_sale<br/>Pedido de Venda] --> FISCAL[l10n_br_fiscal<br/>Documento Fiscal]
+    STOCK[l10n_br_stock<br/>Transferencia] --> FISCAL
+    ACCOUNT[l10n_br_account<br/>Fatura] --> FISCAL
+    FISCAL --> NF[l10n_br_nfe<br/>NF-e XML]
+    NF --> SEFAZ((SEFAZ))
+    CERT[l10n_br_fiscal_certificate<br/>Certificado A1] --> NF
+    SEFAZ --> DANFE[DANFE PDF]
+    SEFAZ --> XML[XML Autorizado]
+    XML --> ACCOUNT2[Atualizar<br/>Fatura]
+    </div>
+</div>
+
+<!-- ==================== CONFIGURACAO ==================== -->
+<div class="section" id="config">
+    <h2><span class="icon">1</span> Parte 1: Configuracao Inicial (uma so vez)</h2>
+
+    <div class="step">
+        <h4>Etapa 1.1 — Cadastrar os Dados da Empresa</h4>
+        <div class="menu-path">Configuracoes > Empresa > Empresa</div>
+        <ol>
+            <li>Abra a empresa principal</li>
+            <li>Preencha os campos fiscais:
+                <ul>
+                    <li><strong>CNPJ:</strong> xx.xxx.xxx/xxxx-xx</li>
+                    <li><strong>Inscricao Estadual (IE):</strong> xxxxxxxxxxxx</li>
+                    <li><strong>Inscricao Municipal (IM):</strong> xxxxxxxx (se aplicavel)</li>
+                    <li><strong>CNAE Fiscal:</strong> xxxxx-xx/xx</li>
+                    <li><strong>Regime Tributario:</strong> Lucro Presumido / Lucro Real / Simples Nacional</li>
+                </ul>
+            </li>
+            <li>Preencha o endereco completo: Logradouro, Numero, Complemento, Bairro, Cidade, Estado, CEP</li>
+            <li>Salve</li>
+        </ol>
+        <div class="alert alert-info">
+            <span class="alert-icon">i</span>
+            <span><strong>Por que isso importa:</strong> Esses dados vao para todos os documentos fiscais. Se o CNPJ ou IE estiver errado, a SEFAZ rejeita a NF-e.</span>
+        </div>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 1.2 — Cadastrar o Certificado Digital A1</h4>
+        <div class="menu-path">Fiscal > Certificados</div>
+        <ol>
+            <li>Clique em "Criar"</li>
+            <li>Preencha:
+                <ul>
+                    <li><strong>Nome:</strong> Certificado A1 - Empresa</li>
+                    <li><strong>Arquivo:</strong> Selecione o arquivo .pfx do certificado</li>
+                    <li><strong>Senha:</strong> Digite a senha do certificado</li>
+                </ul>
+            </li>
+            <li>Salve</li>
+            <li>Teste o certificado clicando em "Testar"</li>
+        </ol>
+        <div class="alert alert-warning">
+            <span class="alert-icon">!</span>
+            <span><strong>Atencao:</strong> Sem certificado valido, nao e possivel enviar NF-e. O certificado A1 tem validade de 1 ano.</span>
+        </div>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 1.3 — Configurar a Operacao Fiscal</h4>
+        <div class="menu-path">Fiscal > Configuracoes > Operacoes Fiscais</div>
+        <ol>
+            <li>Verifique se a operacao padrao esta configurada:
+                <ul>
+                    <li><strong>Tipo:</strong> Saida (para vendas)</li>
+                    <li><strong>CFOP:</strong> 5.102 (venda de mercadoria)</li>
+                    <li><strong>Impostos:</strong> ICMS, PIS, COFINS configurados</li>
+                </ul>
+            </li>
+            <li>Para cada tipo de operacao, crie uma operacao fiscal:
+                <ul>
+                    <li>Venda de mercadoria → CFOP 5.102</li>
+                    <li>Prestacao de servico → CFOP 5.933</li>
+                    <li>Transferencia → CFOP 5.153</li>
+                    <li>Devolucao → CFOP 1.202</li>
+                </ul>
+            </li>
+        </ol>
+        <div class="alert alert-info">
+            <span class="alert-icon">i</span>
+            <span><strong>Por que isso importa:</strong> A operacao fiscal define quais impostos serao aplicados em cada tipo de transacao.</span>
+        </div>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 1.4 — Configurar os Impostos</h4>
+        <div class="menu-path">Fiscal > Configuracoes > Impostos</div>
+        <p>Verifique se os impostos estao corretos:</p>
+        <table>
+            <tr><th>Imposto</th><th>Descricao</th><th>Exemplo</th></tr>
+            <tr><td><strong>ICMS</strong></td><td>Imposto sobre Circulacao de Mercadorias</td><td>18% (SP)</td></tr>
+            <tr><td><strong>IPI</strong></td><td>Imposto sobre Produtos Industrializados</td><td>5% (varia por produto)</td></tr>
+            <tr><td><strong>PIS</strong></td><td>Programa de Integracao Social</td><td>1,65%</td></tr>
+            <tr><td><strong>COFINS</strong></td><td>Contribuicao para Financiamento da Seguridade</td><td>7,6%</td></tr>
+        </table>
+        <ol>
+            <li>Abra cada imposto</li>
+            <li>Verifique a <strong>aliquota</strong> (percentual)</li>
+            <li>Verifique a <strong>conta contabil</strong> vinculada</li>
+            <li>Verifique a <strong>regra de aplicacao</strong></li>
+        </ol>
+        <div class="alert alert-error">
+            <span class="alert-icon">X</span>
+            <span><strong>Importante:</strong> Impostos errados geram NF-e com valores incorretos. Sempre confirme com o departamento fiscal.</span>
+        </div>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 1.5 — Configurar os Parametros da NF-e</h4>
+        <div class="menu-path">Fiscal > Configuracoes > NF-e</div>
+        <ol>
+            <li>Configure os dados de envio:
+                <ul>
+                    <li><strong>Ambiente:</strong> Producao ou Homologacao</li>
+                    <li><strong>UF do Emitente:</strong> Estado da empresa</li>
+                    <li><strong>Codigo do Municipio:</strong> Codigo IBGE</li>
+                    <li><strong>Formato de Impressao:</strong> Retrato (padrao)</li>
+                    <li><strong>Versao do Processo:</strong> WB (padrao)</li>
+                </ul>
+            </li>
+            <li>Configure a serie:
+                <ul>
+                    <li><strong>Serie:</strong> 1 (padrao para saida)</li>
+                    <li><strong>Numero Inicial:</strong> 1</li>
+                </ul>
+            </li>
+            <li>Salve</li>
+        </ol>
+        <div class="alert alert-warning">
+            <span class="alert-icon">!</span>
+            <span><strong>Atencao:</strong> Parametros errados fazem a SEFAZ rejeitar o documento.</span>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== EMISSAO ==================== -->
+<div class="section" id="emissao">
+    <h2><span class="icon">2</span> Parte 2: Fluxo Completo — Venda com NF-e</h2>
+
+    <div class="step">
+        <h4>Etapa 2.1 — Criar o Pedido de Venda</h4>
+        <div class="menu-path">Vendas > Pedidos > Pedidos</div>
+        <ol>
+            <li>Clique em <strong>"Criar"</strong></li>
+            <li>Preencha o cabecalho:
+                <ul>
+                    <li><strong>Cliente:</strong> Selecione o cliente (com CNPJ/IE cadastrados)</li>
+                    <li><strong>Condicao de Pagamento:</strong> Ex: 30/60/90 dias</li>
+                    <li><strong>Lista de Preco:</strong> Se aplicavel</li>
+                </ul>
+            </li>
+            <li>Na aba "Linhas do Pedido", adicione os produtos:
+                <ul>
+                    <li><strong>Produto:</strong> Selecione o produto</li>
+                    <li><strong>Quantidade:</strong> Informe a quantidade</li>
+                    <li><strong>Preco Unitario:</strong> Preco de venda</li>
+                    <li><strong>Impostos:</strong> Sistema calcula automaticamente</li>
+                </ul>
+            </li>
+            <li>Verifique os impostos calculados (clique na linha do produto → aba "Impostos")</li>
+            <li>Clique em <strong>"Confirmar"</strong></li>
+        </ol>
+        <div class="alert alert-success">
+            <span class="alert-icon">OK</span>
+            <span><strong>O que acontece:</strong> O pedido muda de "Rascunho" para "Ordem de Venda". O sistema reserva o estoque automaticamente.</span>
+        </div>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 2.2 — Verificar a Operacao Fiscal</h4>
+        <div class="menu-path">No Pedido de Venda > Aba "Outras Informacoes"</div>
+        <ol>
+            <li>Verifique o campo <strong>"Operacao Fiscal"</strong></li>
+            <li>Confirme que e a operacao correta:
+                <ul>
+                    <li>Venda → Operacao de Venda</li>
+                    <li>Servico → Operacao de Servico</li>
+                    <li>Transferencia → Operacao de Transferencia</li>
+                </ul>
+            </li>
+            <li>Se estiver errado, altere antes de confirmar</li>
+        </ol>
+        <div class="alert alert-error">
+            <span class="alert-icon">X</span>
+            <span><strong>Critico:</strong> A operacao fiscal define os CFOPs e impostos. Se errar aqui, tudo na NF-e fica errado.</span>
+        </div>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 2.3 — Confirmar o Pedido e Gerar a Transferencia</h4>
+        <div class="menu-path">Apos confirmar o pedido de venda</div>
+        <ol>
+            <li>O sistema cria automaticamente uma <strong>transferencia de estoque</strong> (stock.picking)</li>
+            <li>Acesse a transferencia:
+                <ul>
+                    <li>Clique no botao "Transferencia" no pedido de venda</li>
+                    <li>Ou va em Estoque > Operacoes > Transferencias</li>
+                </ul>
+            </li>
+            <li>Na transferencia, verifique:
+                <ul>
+                    <li><strong>Tipo de Operacao:</strong> Saida</li>
+                    <li><strong>Local de Origem:</strong> Estoque</li>
+                    <li><strong>Local de Destino:</strong> Cliente</li>
+                    <li><strong>Produtos:</strong> Todos os itens do pedido</li>
+                </ul>
+            </li>
+        </ol>
+        <div class="alert alert-info">
+            <span class="alert-icon">i</span>
+            <span><strong>Importante:</strong> A transferencia e o documento que move o estoque. Sem ela, nao ha como gerar a NF-e.</span>
+        </div>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 2.4 — Validar a Transferencia (Baixa de Estoque)</h4>
+        <div class="menu-path">Na Transferencia (stock.picking)</div>
+        <ol>
+            <li>Verifique se todos os produtos estao disponiveis</li>
+            <li>Se nao estiver, clique em <strong>"Verificar Disponibilidade"</strong></li>
+            <li>Quando tudo estiver disponivel, clique em <strong>"Validar"</strong></li>
+            <li>Confirme a quantidade a ser transferida</li>
+            <li>O sistema baixa o estoque e cria as movimentacoes</li>
+        </ol>
+        <div class="alert alert-success">
+            <span class="alert-icon">OK</span>
+            <span><strong>O que acontece:</strong> Estoque e baixado → Movimentacoes criadas → <strong>Documento fiscal criado automaticamente</strong> (l10n_br_fiscal.document) → NF-e preparada para envio.</span>
+        </div>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 2.5 — Acessar o Documento Fiscal</h4>
+        <div class="menu-path">Fiscal > Documentos > Documentos Fiscais</div>
+        <ol>
+            <li>No pedido de venda, clique no botao <strong>"Documento Fiscal"</strong></li>
+            <li>Ou va em Fiscal > Documentos > Documentos Fiscais</li>
+            <li>Abra o documento fiscal criado</li>
+        </ol>
+        <p><strong>No formulario, verifique:</strong></p>
+        <table>
+            <tr><th>Campo</th><th>O que verificar</th></tr>
+            <tr><td><strong>Tipo de Documento</strong></td><td>NF-e (Nota Fiscal Eletronica)</td></tr>
+            <tr><td><strong>Numero</strong></td><td>Proximo numero disponivel</td></tr>
+            <tr><td><strong>Data</strong></td><td>Data de emissao</td></tr>
+            <tr><td><strong>Cliente</strong></td><td>CNPJ/IE do destinatario</td></tr>
+            <tr><td><strong>Endereco</strong></td><td>Endereco de entrega</td></tr>
+            <tr><td><strong>Operacao Fiscal</strong></td><td>CFOP correto</td></tr>
+            <tr><td><strong>Produtos</strong></td><td>Descricao, quantidade, preco</td></tr>
+            <tr><td><strong>Impostos</strong></td><td>ICMS, IPI, PIS, COFINS com aliquotas corretas</td></tr>
+            <tr><td><strong>Valor Total</strong></td><td>Soma dos itens + impostos</td></tr>
+        </table>
+        <div class="alert alert-error">
+            <span class="alert-icon">X</span>
+            <span><strong>IMPORTANTE:</strong> Revise TODOS os dados antes de enviar. A SEFAZ nao permite correcao apos a autorizacao.</span>
+        </div>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 2.6 — Revisar os Impostos do Documento Fiscal</h4>
+        <div class="menu-path">No Documento Fiscal > Aba "Impostos" ou "Linhas"</div>
+        <ol>
+            <li>Para cada produto, verifique:
+                <ul>
+                    <li><strong>CFOP:</strong> 5.102 (venda saida interna)</li>
+                    <li><strong>Base de Calculo ICMS:</strong> Valor do produto</li>
+                    <li><strong>Aliquota ICMS:</strong> Percentual do estado</li>
+                    <li><strong>Valor ICMS:</strong> Base x Aliquota</li>
+                    <li><strong>Base de Calculo PIS/COFINS:</strong> Valor do produto</li>
+                    <li><strong>Aliquota PIS/COFINS:</strong> Percentual configurado</li>
+                </ul>
+            </li>
+            <li>Verifique o <strong>Valor Total do Documento</strong></li>
+            <li>Confirme que esta correto</li>
+        </ol>
+        <div class="alert alert-info">
+            <span class="alert-icon">i</span>
+            <span><strong>Dica:</strong> Se algum imposto estiver errado, volte para a configuracao de operacoes fiscais e corrija. Nao altere direto no documento fiscal.</span>
+        </div>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 2.7 — Enviar a NF-e para a SEFAZ</h4>
+        <div class="menu-path">No Documento Fiscal > Botao "Enviar NF-e"</div>
+        <ol>
+            <li>Clique no botao <strong>"Enviar NF-e"</strong></li>
+            <li>O sistema:
+                <ul>
+                    <li>Gera o XML da NF-e</li>
+                    <li>Assina com o certificado digital</li>
+                    <li>Envia para a SEFAZ</li>
+                    <li>Aguarda a resposta</li>
+                </ul>
+            </li>
+            <li>Aguarde o processamento (pode levar alguns segundos)</li>
+        </ol>
+        <p><strong>Possiveis respostas:</strong></p>
+        <table>
+            <tr><th>Resposta</th><th>Significado</th><th>O que fazer</th></tr>
+            <tr><td style="color:var(--success)"><strong>Autorizado</strong></td><td>NF-e aceita pela SEFAZ</td><td>Imprimir DANFE, entregar ao cliente</td></tr>
+            <tr><td style="color:var(--error)"><strong>Rejeitado</strong></td><td>SEFAZ rejeitou o documento</td><td>Verificar motivo, corrigir e reenviar</td></tr>
+            <tr><td style="color:var(--warning)"><strong>Em Processamento</strong></td><td>SEFAZ ainda processando</td><td>Aguardar e consultar depois</td></tr>
+        </table>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 2.8 — Consultar Status da NF-e</h4>
+        <div class="menu-path">No Documento Fiscal > Botao "Consultar Status"</div>
+        <ol>
+            <li>No documento fiscal, clique em <strong>"Consultar Status"</strong></li>
+            <li>O sistema consulta a SEFAZ e atualiza o status</li>
+            <li>Repita ate receber "Autorizado"</li>
+        </ol>
+        <p><strong>Ou consulte pela chave de acesso:</strong></p>
+        <ol>
+            <li>No documento fiscal, copie a <strong>Chave de Acesso</strong> (44 digitos)</li>
+            <li>Acesse o site da SEFAZ do seu estado</li>
+            <li>Cole a chave e consulte</li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 2.9 — Imprimir o DANFE</h4>
+        <div class="menu-path">Apos a NF-e ser autorizada</div>
+        <ol>
+            <li>No documento fiscal, clique em <strong>"Imprimir DANFE"</strong></li>
+            <li>O PDF do DANFE e gerado</li>
+            <li>Imprima e coloque junto com a mercadoria</li>
+            <li>Ou envie por email ao cliente</li>
+        </ol>
+        <div class="alert alert-info">
+            <span class="alert-icon">i</span>
+            <span><strong>O que e o DANFE:</strong> Documento Auxiliar da Nota Fiscal Eletronica. E a representacao grafica da NF-e que acompanha a mercadoria.</span>
+        </div>
+    </div>
+
+    <div class="step">
+        <h4>Etapa 2.10 — Consultar a NF-e no Portal da SEFAZ</h4>
+        <div class="menu-path">Portal da SEFAZ do seu estado</div>
+        <ol>
+            <li>Copie a <strong>Chave de Acesso</strong> do documento fiscal</li>
+            <li>Acesse o portal da SEFAZ do seu estado</li>
+            <li>Va em "Consulta de NF-e por Chave de Acesso"</li>
+            <li>Cole a chave</li>
+            <li>Confirme que:
+                <ul>
+                    <li>Situacao: <strong>Autorizada</strong></li>
+                    <li>Data de Autorizacao: Data correta</li>
+                    <li>Protocolo: Numero do protocolo</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<!-- ==================== SITUACOES ESPECIAIS ==================== -->
+<div class="section" id="especial">
+    <h2><span class="icon">3</span> Parte 3: Situacoes Especiais</h2>
+
+    <div class="step">
+        <h4>3.1 — Cancelar uma NF-e</h4>
+        <div class="menu-path">No Documento Fiscal Autorizado > Botao "Cancelar NF-e"</div>
+        <div class="alert alert-warning">
+            <span class="alert-icon">!</span>
+            <span><strong>So e possivel cancelar se:</strong> A NF-e foi autorizada ha menos de 24 horas E a mercadoria NAO foi enviada.</span>
+        </div>
+        <ol>
+            <li>Abra o documento fiscal autorizado</li>
+            <li>Clique em <strong>"Cancelar NF-e"</strong></li>
+            <li>Informe o <strong>motivo do cancelamento</strong> (minimo 15 caracteres)</li>
+            <li>Confirme</li>
+            <li>O sistema envia o cancelamento para a SEFAZ</li>
+            <li>Aguarde a resposta</li>
+        </ol>
+        <div class="alert alert-info">
+            <span class="alert-icon">i</span>
+            <span><strong>Se nao puder cancelar:</strong> Emita uma Nota Fiscal de Devolucao (NFe de devolucao) com CFOP de retorno.</span>
+        </div>
+    </div>
+
+    <div class="step">
+        <h4>3.2 — Inutilizar Numeracao</h4>
+        <div class="menu-path">Fiscal > NF-e > Inutilizacao de Numeracao</div>
+        <p><strong>Quando usar:</strong> Se precisar pular numeros da sequencia</p>
+        <ol>
+            <li>Clique em "Criar"</li>
+            <li>Informe:
+                <ul>
+                    <li><strong>Numero Inicio:</strong> Primeiro numero a inutilizar</li>
+                    <li><strong>Numero Fim:</strong> Ultimo numero a inutilizar</li>
+                    <li><strong>Justificativa:</strong> Motivo da inutilizacao</li>
+                </ul>
+            </li>
+            <li>Envie para a SEFAZ</li>
+        </ol>
+    </div>
+
+    <div class="step">
+        <h4>3.3 — Carta de Correcao</h4>
+        <div class="menu-path">No Documento Fiscal > Botao "Carta de Correcao"</div>
+        <p><strong>Quando usar:</strong> Para corrigir dados do destinatario apos a autorizacao (exceto valor)</p>
+        <ol>
+            <li>No documento fiscal, clique em <strong>"Carta de Correcao"</strong></li>
+            <li>Informe o que deseja corrigir</li>
+            <li>Envie para a SEFAZ</li>
+        </ol>
+        <div class="alert alert-error">
+            <span class="alert-icon">X</span>
+            <span><strong>Nao e possivel corrigir:</strong> Valor, impostos, produtos. Para esses casos, cancele e reemita.</span>
+        </div>
+    </div>
+
+    <div class="step">
+        <h4>3.4 — Consultar Documentos Recebidos (Distribuicao de DF-e)</h4>
+        <div class="menu-path">Fiscal > DF-e > "Consultar NFe Destinadas"</div>
+        <p><strong>Para ver NF-e que outros emitiram para voce:</strong></p>
+        <ol>
+            <li>Informe o CNPJ</li>
+            <li>O sistema baixa todas as NF-e destinadas ao seu CNPJ</li>
+            <li>Voce pode <strong>incorporar</strong> ao sistema ou <strong>ignorar</strong></li>
+        </ol>
+    </div>
+</div>
+
+<!-- ==================== ERROS ==================== -->
+<div class="section" id="erros">
+    <h2><span class="icon">!</span> Parte 5: Erros Comuns e Solucoes</h2>
+
+    <table>
+        <tr><th>Erro</th><th>Causa</th><th>Solucao</th></tr>
+        <tr><td><strong>Rejeicao 104</strong></td><td>CNPJ do destinatario invalido</td><td>Verifique o CNPJ no cadastro do cliente</td></tr>
+        <tr><td><strong>Rejeicao 124</strong></td><td>IE do destinatario invalida</td><td>Verifique a IE no cadastro do cliente</td></tr>
+        <tr><td><strong>Rejeicao 238</strong></td><td>CFOP invalido</td><td>Verifique a operacao fiscal</td></tr>
+        <tr><td><strong>Rejeicao 252</strong></td><td>Imposto calculado incorretamente</td><td>Verifique os impostos no documento</td></tr>
+        <tr><td><strong>Rejeicao 574</strong></td><td>Certificado invalido ou vencido</td><td>Verifique a validade do certificado</td></tr>
+        <tr><td><strong>Rejeicao 631</strong></td><td>Chave de acesso invalida</td><td>Verifique os 44 digitos da chave</td></tr>
+        <tr><td><strong>Timeout</strong></td><td>SEFAZ sem resposta</td><td>Aguarde e consulte o status depois</td></tr>
+        <tr><td><strong>XML malformado</strong></td><td>Erro na geracao do XML</td><td>Contate o suporte tecnico</td></tr>
+    </table>
+</div>
+
+<!-- ==================== DICAS ==================== -->
+<div class="section" id="dicas">
+    <h2><span class="icon">*</span> Parte 4: Dicas e Cuidados</h2>
+
+    <h3>Antes de Enviar</h3>
+    <ul class="checklist">
+        <li>CNPJ/IE do cliente esta correto?</li>
+        <li>Endereco de entrega esta correto?</li>
+        <li>CFOP e o correto para essa operacao?</li>
+        <li>Aliquotas de ICMS, PIS, COFINS estao corretas?</li>
+        <li>Descricao dos produtos esta clara?</li>
+        <li>Valor total esta correto?</li>
+        <li>Certificado digital esta valido (nao vencido)?</li>
+    </ul>
+
+    <h3>Apos Enviar</h3>
+    <ul class="checklist">
+        <li>DANFE foi impresso e colocado com a mercadoria?</li>
+        <li>Chave de acesso foi enviada ao cliente?</li>
+        <li>Arquivo XML foi salvo para consulta futura?</li>
+        <li>Lancamento contabil foi criado automaticamente?</li>
+    </ul>
+
+    <h3>Numeracao</h3>
+    <ul class="checklist">
+        <li>Numeracao da NF-e esta sequencial?</li>
+        <li>Nao ha gaps na numeracao?</li>
+        <li>Serie esta configurada corretamente?</li>
+    </ul>
+</div>
+
+<!-- ==================== MODULOS ==================== -->
+<div class="section" id="modulos">
+    <h2><span class="icon">M</span> Modulos Envolvidos</h2>
+
+    <div class="modules-grid">
+        <div class="module-card"><code>l10n_br_fiscal</code><p>Base fiscal — documento, operacoes, impostos</p></div>
+        <div class="module-card"><code>l10n_br_nfe</code><p>Emissao e consulta de NF-e</p></div>
+        <div class="module-card"><code>l10n_br_account</code><p>Integracao contabilidade + fiscal</p></div>
+        <div class="module-card"><code>l10n_br_account_nfe</code><p>Integracao contabilidade + NF-e</p></div>
+        <div class="module-card"><code>l10n_br_sale</code><p>Integracao venda + fiscal</p></div>
+        <div class="module-card"><code>l10n_br_stock</code><p>Integracao estoque + fiscal</p></div>
+        <div class="module-card"><code>l10n_br_stock_account</code><p>Integracao estoque + contabilidade + fiscal</p></div>
+        <div class="module-card"><code>l10n_br_fiscal_certificate</code><p>Certificado digital A1</p></div>
+        <div class="module-card"><code>l10n_br_fiscal_dfe</code><p>Distribuicao de documentos fiscais</p></div>
+        <div class="module-card"><code>l10n_br_fiscal_closing</code><p>Encerramento fiscal mensal</p></div>
+    </div>
+
+    <h3>Quando usar cada modulo</h3>
+    <table>
+        <tr><th>Modulo</th><th>Quando Usado</th></tr>
+        <tr><td><code>l10n_br_fiscal</code></td><td>Configuracao de operacoes, impostos, documentos</td></tr>
+        <tr><td><code>l10n_br_nfe</code></td><td>Emissao e consulta de NF-e</td></tr>
+        <tr><td><code>l10n_br_account</code></td><td>Integracao com contabilidade</td></tr>
+        <tr><td><code>l10n_br_account_nfe</code></td><td>Vinculo entre fatura e NF-e</td></tr>
+        <tr><td><code>l10n_br_sale</code></td><td>Integracao com vendas</td></tr>
+        <tr><td><code>l10n_br_stock</code></td><td>Integracao com estoque</td></tr>
+        <tr><td><code>l10n_br_stock_account</code></td><td>Integracao estoque + contabilidade</td></tr>
+        <tr><td><code>l10n_br_fiscal_certificate</code></td><td>Gestao do certificado digital A1</td></tr>
+        <tr><td><code>l10n_br_fiscal_dfe</code></td><td>Distribuicao de documentos fiscais</td></tr>
+        <tr><td><code>l10n_br_fiscal_closing</code></td><td>Encerramento fiscal mensal</td></tr>
+    </table>
+</div>
+
+</div><!-- /container -->
+
+<div class="footer">
+    <p>Treinamento baseado na documentacao dd-modulos Odoo 16 — Localizacao Brasileira OCA</p>
+    <p>EGD — Escodoo</p>
+</div>
+
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            primaryColor: '#714B67',
+            primaryTextColor: '#fff',
+            primaryBorderColor: '#5A3A52',
+            lineColor: '#9C6B8E',
+            secondaryColor: '#F3E8EE',
+            tertiaryColor: '#FAF8F9',
+            fontFamily: 'Segoe UI, system-ui, sans-serif'
+        },
+        flowchart: { curve: 'basis', padding: 15 }
+    });
+</script>
+
+</body>
+</html>
