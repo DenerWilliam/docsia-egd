@@ -1,0 +1,20 @@
+{
+  "name": "odoo-screenshots",
+  "version": "1.0.0",
+  "description": "Screenshots automaticos do Odoo 16 para treinamento",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:vendas": "cypress run --spec cypress/e2e/01-vendas.cy.js",
+    "cy:compras": "cypress run --spec cypress/e2e/02-compras.cy.js",
+    "cy:estoque": "cypress run --spec cypress/e2e/03-estoque.cy.js",
+    "cy:nfe": "cypress run --spec cypress/e2e/04-nfe.cy.js",
+    "cy:all": "cypress run"
+  },
+  "keywords": ["odoo", "cypress", "screenshots"],
+  "author": "EGD",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^16.1.0"
+  }
+}
