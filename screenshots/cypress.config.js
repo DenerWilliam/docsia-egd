@@ -10,7 +10,9 @@ module.exports = defineConfig({
     supportFile: false,
     video: false,
     chromeWebSecurity: false,
-    defaultCommandTimeout: 30000,
-    pageLoadTimeout: 60000,
+    defaultCommandTimeout: 60000,
+    pageLoadTimeout: 120000,
+    responseTimeout: 120000,
+    taskTimeout: 120000,
   },
 })

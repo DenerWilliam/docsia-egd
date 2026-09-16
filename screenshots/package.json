@@ -11,10 +11,17 @@
     "cy:nfe": "cypress run --spec cypress/e2e/04-nfe.cy.js",
     "cy:all": "cypress run"
   },
-  "keywords": ["odoo", "cypress", "screenshots"],
+  "keywords": [
+    "odoo",
+    "cypress",
+    "screenshots"
+  ],
   "author": "EGD",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^16.1.0"
+  },
+  "dependencies": {
+    "puppeteer": "^25.11.0"
   }
 }
