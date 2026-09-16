@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparativo: {{MODULO}} — Odoo 14 vs 16 vs 17 | EGD</title>
+    <style>
+        :root{--primary:#714B67;--primary-light:#8B6B7F;--primary-dark:#5A3A52;--accent:#9C6B8E;--bg:#FAF8F9;--card:#FFF;--text:#2D2327;--text-light:#6B5E63;--border:#E8E0E4;--success:#2E7D32;--warning:#F57C00;--error:#C62828;--info:#1565C0;--code-bg:#F5F0F2;--shadow:0 2px 12px rgba(113,75,103,.08)}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+        .hero{background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 50%,var(--accent) 100%);color:#fff;padding:3rem 2rem;text-align:center;position:relative;overflow:hidden}
+        .hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%)}
+        .hero h1{font-size:2.2rem;font-weight:700;margin-bottom:.5rem;position:relative}
+        .hero p{font-size:1.1rem;opacity:.9;position:relative}
+        .hero .badge{display:inline-block;background:rgba(255,255,255,.2);padding:.3rem 1rem;border-radius:20px;font-size:.85rem;margin-top:1rem;position:relative}
+        .nav{background:var(--card);border-bottom:1px solid var(--border);padding:1rem 2rem;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
+        .nav-inner{max-width:1100px;margin:0 auto;display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+        .nav a{text-decoration:none;color:var(--text-light);padding:.4rem .9rem;border-radius:6px;font-size:.85rem;font-weight:500;transition:all .2s}
+        .nav a:hover{background:var(--primary);color:#fff}
+        .container{max-width:1100px;margin:0 auto;padding:2rem}
+        .section{background:var(--card);border-radius:12px;padding:2rem;margin-bottom:2rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+        .section h2{font-size:1.5rem;color:var(--primary);margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:2px solid var(--primary);display:flex;align-items:center;gap:.5rem}
+        .section h2 .icon{width:32px;height:32px;background:var(--primary);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+        .section h3{font-size:1.15rem;color:var(--text);margin:1.5rem 0 .75rem;padding-left:.5rem;border-left:3px solid var(--accent)}
+        table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+        th{background:var(--primary);color:#fff;padding:.6rem .8rem;text-align:left;font-weight:600}
+        td{padding:.5rem .8rem;border-bottom:1px solid var(--border)}
+        tr:nth-child(even){background:var(--bg)}
+        tr:hover{background:#F3E8EE}
+        .tag{display:inline-block;padding:.2rem .5rem;border-radius:4px;font-size:.75rem;font-weight:600;margin:.1rem}
+        .tag-novo{background:#E8F5E9;color:#1B5E20}
+        .tag-alterado{background:#FFF3E0;color:#E65100}
+        .tag-removido{background:#FFEBEE;color:#B71C1C}
+        .tag-mantido{background:#E3F2FD;color:#0D47A1}
+        .comparison{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1rem 0}
+        .comparison .before,.comparison .after{padding:1rem;border-radius:8px}
+        .comparison .before{background:#FFF3E0;border:1px solid #FFB74D}
+        .comparison .after{background:#E8F5E9;border:1px solid #81C784}
+        .comparison h4{margin-bottom:.5rem;font-size:.9rem}
+        .comparison .before h4{color:#E65100}
+        .comparison .after h4{color:#1B5E20}
+        .footer{text-align:center;padding:2rem;color:var(--text-light);font-size:.85rem;border-top:1px solid var(--border);margin-top:2rem}
+        @media(max-width:768px){.hero h1{font-size:1.5rem}.container{padding:1rem}.section{padding:1.25rem}.nav a{font-size:.75rem;padding:.3rem .6rem}.comparison{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>Comparativo: {{MODULO}}</h1>
+    <p>{{DESCRICAO}}</p>
+    <div class="badge">Odoo 14 vs 16 vs 17</div>
+</div>
+
+<div class="nav">
+    <div class="nav-inner">
+        <a href="#resumo">Resumo</a>
+        <a href="#interface">Interface</a>
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#mudancas">Mudancas</a>
+        <a href="#dicas">Dicas</a>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- ==================== RESUMO ==================== -->
+    <div class="section" id="resumo">
+        <h2><span class="icon">~</span> Resumo das Mudancas</h2>
+
+        <table>
+            <tr><th>Versao</th><th>Principais Mudancas</th><th>Status</th></tr>
+            <tr>
+                <td><strong>v14 → v16</strong></td>
+                <td>Mudancas na interface, botoes removidos, edicao inline</td>
+                <td><span class="tag tag-alterado">Alterado</span></td>
+            </tr>
+            <tr>
+                <td><strong>v16 → v17</strong></td>
+                <td>Framework OWL, sidebar redesenhada, barras de busca</td>
+                <td><span class="tag tag-alterado">Alterado</span></td>
+            </tr>
+            <tr>
+                <td><strong>v17 → v18</strong></td>
+                <td>Recursos de IA, novas funcionalidades</td>
+                <td><span class="tag tag-novo">Novo</span></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- ==================== INTERFACE ==================== -->
+    <div class="section" id="interface">
+        <h2><span class="icon">I</span> Mudancas de Interface</h2>
+
+        <div class="comparison">
+            <div class="before">
+                <h4>Odoo 14 (Antes)</h4>
+                <ul>
+                    <li>Botoes Editar/Salvar</li>
+                    <li>Formularios rigidos</li>
+                    <li>Tags Analiticas</li>
+                </ul>
+            </div>
+            <div class="after">
+                <h4>Odoo 16 (Depois)</h4>
+                <ul>
+                    <li>Edicao inline (sem botao Salvar)</li>
+                    <li>Formularios flexiveis</li>
+                    <li>Distribuicao Analitica</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== FUNCIONALIDADES ==================== -->
+    <div class="section" id="funcionalidades">
+        <h2><span class="icon">F</span> Funcionalidades</h2>
+
+        <table>
+            <tr><th>Funcionalidade</th><th>v14</th><th>v16</th><th>v17</th></tr>
+            <tr>
+                <td><strong>Edicao de registros</strong></td>
+                <td>Botao Editar → Alterar → Salvar</td>
+                <td>Clique direto e edite</td>
+                <td>Igual v16</td>
+            </tr>
+            <tr>
+                <td><strong>Botoes de acao</strong></td>
+                <td>Abaixo do titulo</td>
+                <td>Topo direito</td>
+                <td>Somente icones</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- ==================== MUDANCAS ==================== -->
+    <div class="section" id="mudancas">
+        <h2><span class="icon">M</span> Detalhes das Mudancas</h2>
+
+        <h3>Feature X</h3>
+        <div class="comparison">
+            <div class="before">
+                <h4>Como era</h4>
+                <p>Descricao de como funcionava antes.</p>
+            </div>
+            <div class="after">
+                <h4>Como ficou</h4>
+                <p>Descricao de como funciona agora.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DICAS ==================== -->
+    <div class="section" id="dicas">
+        <h2><span class="icon">*</span> Dicas para Usuarios</h2>
+
+        <div class="alert alert-info" style="margin:1rem 0">
+            <span class="alert-icon">i</span>
+            <span><strong>Dica:</strong> Texto da dica para usuarios.</span>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>Comparativo baseado na migracao Odoo 14 para 16 — Localizacao Brasileira OCA</p>
+    <p>EGD — Escodoo</p>
+</div>
+
+</body>
+</html>

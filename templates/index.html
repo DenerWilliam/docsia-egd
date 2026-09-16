@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITULO}} — EGD</title>
+    <style>
+        :root{--primary:#714B67;--primary-light:#8B6B7F;--primary-dark:#5A3A52;--accent:#9C6B8E;--bg:#FAF8F9;--card:#FFF;--text:#2D2327;--text-light:#6B5E63;--border:#E8E0E4;--success:#2E7D32;--warning:#F57C00;--info:#1565C0;--shadow:0 2px 12px rgba(113,75,103,.08)}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+        .hero{background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 50%,var(--accent) 100%);color:#fff;padding:4rem 2rem;text-align:center;position:relative;overflow:hidden}
+        .hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%)}
+        .hero h1{font-size:2.5rem;font-weight:700;margin-bottom:.5rem;position:relative}
+        .hero p{font-size:1.15rem;opacity:.9;position:relative;max-width:600px;margin:0 auto}
+        .hero .badge{display:inline-block;background:rgba(255,255,255,.2);padding:.4rem 1.2rem;border-radius:20px;font-size:.9rem;margin-top:1rem;position:relative}
+        .container{max-width:1100px;margin:0 auto;padding:2rem;flex:1}
+        .intro{text-align:center;margin-bottom:2.5rem}
+        .intro h2{font-size:1.3rem;color:var(--primary);margin-bottom:.5rem}
+        .intro p{color:var(--text-light);font-size:.95rem}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-bottom:2rem}
+        .card{background:var(--card);border-radius:16px;padding:2rem;box-shadow:var(--shadow);border:1px solid var(--border);transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+        .card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(113,75,103,.15)}
+        .card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+        .card .num{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;background:var(--primary);color:#fff;border-radius:12px;font-size:1.3rem;font-weight:700;margin-bottom:1rem}
+        .card h3{font-size:1.2rem;color:var(--text);margin-bottom:.5rem}
+        .card .desc{color:var(--text-light);font-size:.9rem;margin-bottom:1rem;line-height:1.5}
+        .card .modules{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.25rem}
+        .card .modules span{background:var(--bg);border:1px solid var(--border);padding:.2rem .5rem;border-radius:4px;font-size:.75rem;color:var(--primary);font-family:'Cascadia Code','Fira Code',monospace}
+        .card .tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.25rem}
+        .card .tags span{background:#E8F5E9;color:#1B5E20;padding:.2rem .6rem;border-radius:12px;font-size:.75rem;font-weight:500}
+        .card .links{display:flex;gap:.75rem}
+        .card .links a{text-decoration:none;padding:.5rem 1rem;border-radius:8px;font-size:.85rem;font-weight:600;transition:all .2s}
+        .card .links .btn-primary{background:var(--primary);color:#fff}
+        .card .links .btn-primary:hover{background:var(--primary-dark)}
+        .card .links .btn-secondary{background:var(--bg);color:var(--primary);border:1px solid var(--border)}
+        .card .links .btn-secondary:hover{background:var(--border)}
+        .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin:2rem 0;padding:1.5rem;background:var(--card);border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow)}
+        .stat{text-align:center}
+        .stat .value{font-size:2rem;font-weight:700;color:var(--primary)}
+        .stat .label{font-size:.85rem;color:var(--text-light)}
+        .footer{text-align:center;padding:2rem;color:var(--text-light);font-size:.85rem;border-top:1px solid var(--border);margin-top:auto}
+        @media(max-width:768px){.hero h1{font-size:1.8rem}.hero p{font-size:1rem}.container{padding:1rem}.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>{{TITULO}}</h1>
+    <p>{{DESCRICAO}}</p>
+    <div class="badge">{{BADGE}}</div>
+</div>
+
+<div class="container">
+
+    <div class="intro">
+        <h2>{{SUBTITULO}}</h2>
+        <p>{{TEXTO_INTRO}}</p>
+    </div>
+
+    <div class="grid">
+
+        <!-- ITEM 1 -->
+        <div class="card">
+            <div class="num">1</div>
+            <h3>{{ITEM1_TITULO}}</h3>
+            <p class="desc">{{ITEM1_DESC}}</p>
+            <div class="modules">
+                <span>modulo_1</span>
+                <span>modulo_2</span>
+            </div>
+            <div class="tags">
+                <span>Tag 1</span>
+                <span>Tag 2</span>
+            </div>
+            <div class="links">
+                <a href="{{ITEM1_LINK}}" class="btn-primary">Abrir</a>
+                <a href="{{ITEM1_LINK_MD}}" class="btn-secondary">Markdown</a>
+            </div>
+        </div>
+
+        <!-- ITEM 2 -->
+        <div class="card">
+            <div class="num">2</div>
+            <h3>{{ITEM2_TITULO}}</h3>
+            <p class="desc">{{ITEM2_DESC}}</p>
+            <div class="modules">
+                <span>modulo_1</span>
+                <span>modulo_2</span>
+            </div>
+            <div class="tags">
+                <span>Tag 1</span>
+                <span>Tag 2</span>
+            </div>
+            <div class="links">
+                <a href="{{ITEM2_LINK}}" class="btn-primary">Abrir</a>
+                <a href="{{ITEM2_LINK_MD}}" class="btn-secondary">Markdown</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <div class="value">{{STAT1_VALOR}}</div>
+            <div class="label">{{STAT1_LABEL}}</div>
+        </div>
+        <div class="stat">
+            <div class="value">{{STAT2_VALOR}}</div>
+            <div class="label">{{STAT2_LABEL}}</div>
+        </div>
+        <div class="stat">
+            <div class="value">{{STAT3_VALOR}}</div>
+            <div class="label">{{STAT3_LABEL}}</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>{{FOOTER}}</p>
+</div>
+
+</body>
+</html>

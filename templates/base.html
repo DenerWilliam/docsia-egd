@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITULO}} — Odoo 16 | EGD</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        :root{--primary:#714B67;--primary-light:#8B6B7F;--primary-dark:#5A3A52;--accent:#9C6B8E;--bg:#FAF8F9;--card:#FFF;--text:#2D2327;--text-light:#6B5E63;--border:#E8E0E4;--success:#2E7D32;--warning:#F57C00;--error:#C62828;--info:#1565C0;--code-bg:#F5F0F2;--shadow:0 2px 12px rgba(113,75,103,.08)}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+        .hero{background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 50%,var(--accent) 100%);color:#fff;padding:3rem 2rem;text-align:center;position:relative;overflow:hidden}
+        .hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%)}
+        .hero h1{font-size:2.2rem;font-weight:700;margin-bottom:.5rem;position:relative}
+        .hero p{font-size:1.1rem;opacity:.9;position:relative}
+        .hero .badge{display:inline-block;background:rgba(255,255,255,.2);padding:.3rem 1rem;border-radius:20px;font-size:.85rem;margin-top:1rem;position:relative}
+        .nav{background:var(--card);border-bottom:1px solid var(--border);padding:1rem 2rem;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
+        .nav-inner{max-width:1100px;margin:0 auto;display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+        .nav a{text-decoration:none;color:var(--text-light);padding:.4rem .9rem;border-radius:6px;font-size:.85rem;font-weight:500;transition:all .2s}
+        .nav a:hover{background:var(--primary);color:#fff}
+        .container{max-width:1100px;margin:0 auto;padding:2rem}
+        .section{background:var(--card);border-radius:12px;padding:2rem;margin-bottom:2rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+        .section h2{font-size:1.5rem;color:var(--primary);margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:2px solid var(--primary);display:flex;align-items:center;gap:.5rem}
+        .section h2 .icon{width:32px;height:32px;background:var(--primary);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+        .section h3{font-size:1.15rem;color:var(--text);margin:1.5rem 0 .75rem;padding-left:.5rem;border-left:3px solid var(--accent)}
+        .step{background:var(--bg);border-radius:10px;padding:1.25rem;margin:1rem 0;border-left:4px solid var(--primary);position:relative}
+        .step h4{color:var(--primary-dark);margin-bottom:.5rem;font-size:1rem}
+        .step .menu-path{display:inline-block;background:var(--code-bg);padding:.2rem .6rem;border-radius:4px;font-family:'Cascadia Code','Fira Code',monospace;font-size:.8rem;color:var(--primary);margin-bottom:.5rem;border:1px solid var(--border)}
+        .step ol,.step ul{padding-left:1.5rem;margin:.5rem 0}
+        .step li{margin:.3rem 0;font-size:.95rem}
+        .step li strong{color:var(--primary-dark)}
+        .alert{padding:.75rem 1rem;border-radius:8px;margin:.75rem 0;font-size:.9rem;display:flex;align-items:flex-start;gap:.5rem}
+        .alert-info{background:#E3F2FD;border-left:4px solid var(--info);color:#0D47A1}
+        .alert-warning{background:#FFF3E0;border-left:4px solid var(--warning);color:#E65100}
+        .alert-success{background:#E8F5E9;border-left:4px solid var(--success);color:#1B5E20}
+        .alert-error{background:#FFEBEE;border-left:4px solid var(--error);color:#B71C1C}
+        table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+        th{background:var(--primary);color:#fff;padding:.6rem .8rem;text-align:left;font-weight:600}
+        td{padding:.5rem .8rem;border-bottom:1px solid var(--border)}
+        tr:nth-child(even){background:var(--bg)}
+        tr:hover{background:#F3E8EE}
+        .mermaid{background:#fff;border-radius:10px;padding:1.5rem;margin:1rem 0;text-align:center;overflow-x:auto;border:1px solid var(--border)}
+        .mermaid-title{font-weight:600;color:var(--primary);margin-bottom:.75rem;font-size:.95rem}
+        .checklist{list-style:none;padding:0}
+        .checklist li{padding:.4rem 0;padding-left:1.8rem;position:relative;font-size:.9rem}
+        .checklist li::before{content:'☐';position:absolute;left:0;color:var(--primary);font-size:1rem}
+        .modules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem;margin:1rem 0}
+        .module-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.75rem;font-size:.85rem}
+        .module-card code{background:var(--primary);color:#fff;padding:.15rem .4rem;border-radius:3px;font-size:.75rem}
+        .module-card p{color:var(--text-light);margin-top:.25rem;font-size:.8rem}
+        .footer{text-align:center;padding:2rem;color:var(--text-light);font-size:.85rem;border-top:1px solid var(--border);margin-top:2rem}
+        @media(max-width:768px){.hero h1{font-size:1.5rem}.container{padding:1rem}.section{padding:1.25rem}.nav a{font-size:.75rem;padding:.3rem .6rem}}
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>{{TITULO}}</h1>
+    <p>{{SUBTITULO}}</p>
+    <div class="badge">{{MODULOS}}</div>
+</div>
+
+<div class="nav">
+    <div class="nav-inner">
+        <!-- Adicionar links de navegacao aqui -->
+        <a href="#secao1">Secao 1</a>
+        <a href="#secao2">Secao 2</a>
+        <a href="#secao3">Secao 3</a>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- ==================== CONTEUDO ==================== -->
+    <div class="section" id="secao1">
+        <h2><span class="icon">1</span> Secao 1</h2>
+        <!-- Conteudo aqui -->
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>{{FOOTER}}</p>
+</div>
+
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            primaryColor: '#714B67',
+            primaryTextColor: '#fff',
+            primaryBorderColor: '#5A3A52',
+            lineColor: '#9C6B8E',
+            secondaryColor: '#F3E8EE',
+            tertiaryColor: '#FAF8F9',
+            fontFamily: 'Segoe UI, system-ui, sans-serif'
+        },
+        flowchart: { curve: 'basis', padding: 15 }
+    });
+</script>
+
+</body>
+</html>
