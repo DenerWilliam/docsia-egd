@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITULO}} — EGD</title>
+    <style>
+        :root{--primary:#714B67;--primary-light:#8B6B7F;--primary-dark:#5A3A52;--accent:#9C6B8E;--bg:#FAF8F9;--card:#FFF;--text:#2D2327;--text-light:#6B5E63;--border:#E8E0E4;--success:#2E7D32;--warning:#F57C00;--info:#1565C0;--shadow:0 2px 12px rgba(113,75,103,.08)}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+        .hero{background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 50%,var(--accent) 100%);color:#fff;padding:4rem 2rem;text-align:center;position:relative;overflow:hidden}
+        .hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 70%)}
+        .hero h1{font-size:2.5rem;font-weight:700;margin-bottom:.5rem;position:relative}
+        .hero p{font-size:1.15rem;opacity:.9;position:relative;max-width:700px;margin:0 auto}
+        .hero .badge{display:inline-block;background:rgba(255,255,255,.2);padding:.4rem 1.2rem;border-radius:20px;font-size:.9rem;margin-top:1rem;position:relative}
+        .container{max-width:1100px;margin:0 auto;padding:3rem 2rem}
+        .section{background:var(--card);border-radius:16px;padding:2.5rem;margin-bottom:2rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+        .section h2{font-size:1.8rem;color:var(--primary);margin-bottom:1.5rem;text-align:center}
+        .section h3{font-size:1.2rem;color:var(--text);margin:1.5rem 0 .75rem;padding-left:.5rem;border-left:3px solid var(--accent)}
+        .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin:1.5rem 0}
+        .feature{background:var(--bg);border-radius:12px;padding:1.5rem;border:1px solid var(--border);transition:transform .2s}
+        .feature:hover{transform:translateY(-2px)}
+        .feature .icon{width:48px;height:48px;background:var(--primary);color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1rem}
+        .feature h4{color:var(--primary-dark);margin-bottom:.5rem}
+        .feature p{color:var(--text-light);font-size:.9rem}
+        .timeline{position:relative;padding:1rem 0}
+        .timeline::before{content:'';position:absolute;left:24px;top:0;bottom:0;width:3px;background:var(--accent)}
+        .timeline-item{position:relative;padding-left:60px;margin-bottom:2rem}
+        .timeline-item::before{content:'';position:absolute;left:16px;top:4px;width:20px;height:20px;background:var(--primary);border-radius:50%;border:3px solid var(--accent)}
+        .timeline-item h4{color:var(--primary-dark);margin-bottom:.25rem}
+        .timeline-item p{color:var(--text-light);font-size:.9rem}
+        .comparison{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.5rem 0}
+        .comparison .col{padding:1.5rem;border-radius:12px}
+        .comparison .before{background:#FFF3E0;border:1px solid #FFB74D}
+        .comparison .after{background:#E8F5E9;border:1px solid #81C784}
+        .comparison h4{margin-bottom:.75rem}
+        .comparison .before h4{color:#E65100}
+        .comparison .after h4{color:#1B5E20}
+        .comparison ul{padding-left:1.2rem}
+        .comparison li{margin:.4rem 0;font-size:.9rem}
+        .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin:2rem 0}
+        .stat{text-align:center;padding:1.5rem;background:var(--bg);border-radius:12px;border:1px solid var(--border)}
+        .stat .value{font-size:2.5rem;font-weight:700;color:var(--primary)}
+        .stat .label{font-size:.9rem;color:var(--text-light)}
+        .cta{text-align:center;padding:3rem;background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);border-radius:16px;color:#fff;margin:2rem 0}
+        .cta h2{color:#fff;margin-bottom:1rem}
+        .cta p{opacity:.9;margin-bottom:1.5rem}
+        .cta a{display:inline-block;background:#fff;color:var(--primary);padding:.75rem 2rem;border-radius:8px;text-decoration:none;font-weight:600;transition:transform .2s}
+        .cta a:hover{transform:scale(1.05)}
+        .footer{text-align:center;padding:2rem;color:var(--text-light);font-size:.85rem;border-top:1px solid var(--border);margin-top:2rem}
+        @media(max-width:768px){.hero h1{font-size:1.8rem}.container{padding:1rem}.section{padding:1.5rem}.comparison{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>{{TITULO}}</h1>
+    <p>{{DESCRICAO}}</p>
+    <div class="badge">{{CLIENTE}}</div>
+</div>
+
+<div class="container">
+
+    <!-- VISAO GERAL -->
+    <div class="section">
+        <h2>Visao Geral do Projeto</h2>
+        <p style="text-align:center;color:var(--text-light);max-width:800px;margin:0 auto 2rem">{{VISAO_GERAL}}</p>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="value">{{STAT1_VALOR}}</div>
+                <div class="label">{{STAT1_LABEL}}</div>
+            </div>
+            <div class="stat">
+                <div class="value">{{STAT2_VALOR}}</div>
+                <div class="label">{{STAT2_LABEL}}</div>
+            </div>
+            <div class="stat">
+                <div class="value">{{STAT3_VALOR}}</div>
+                <div class="label">{{STAT3_LABEL}}</div>
+            </div>
+            <div class="stat">
+                <div class="value">{{STAT4_VALOR}}</div>
+                <div class="label">{{STAT4_LABEL}}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FUNCIONALIDADES -->
+    <div class="section">
+        <h2>Funcionalidades Principais</h2>
+
+        <div class="features">
+            <div class="feature">
+                <div class="icon">{{ICON1}}</div>
+                <h4>{{FUNC1_TITULO}}</h4>
+                <p>{{FUNC1_DESC}}</p>
+            </div>
+            <div class="feature">
+                <div class="icon">{{ICON2}}</div>
+                <h4>{{FUNC2_TITULO}}</h4>
+                <p>{{FUNC2_DESC}}</p>
+            </div>
+            <div class="feature">
+                <div class="icon">{{ICON3}}</div>
+                <h4>{{FUNC3_TITULO}}</h4>
+                <p>{{FUNC3_DESC}}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MUDANCAS -->
+    <div class="section">
+        <h2>Mudancas vs Versao Anterior</h2>
+
+        <div class="comparison">
+            <div class="col before">
+                <h4>Odoo 14 (Antes)</h4>
+                <ul>
+                    <li>{{ANTES1}}</li>
+                    <li>{{ANTES2}}</li>
+                    <li>{{ANTES3}}</li>
+                </ul>
+            </div>
+            <div class="col after">
+                <h4>Odoo 16 (Depois)</h4>
+                <ul>
+                    <li>{{DEPOIS1}}</li>
+                    <li>{{DEPOIS2}}</li>
+                    <li>{{DEPOIS3}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- CRONOGRAMA -->
+    <div class="section">
+        <h2>Cronograma de Implementacao</h2>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <h4>{{FASE1_TITULO}}</h4>
+                <p>{{FASE1_DESC}}</p>
+            </div>
+            <div class="timeline-item">
+                <h4>{{FASE2_TITULO}}</h4>
+                <p>{{FASE2_DESC}}</p>
+            </div>
+            <div class="timeline-item">
+                <h4>{{FASE3_TITULO}}</h4>
+                <p>{{FASE3_DESC}}</p>
+            </div>
+            <div class="timeline-item">
+                <h4>{{FASE4_TITULO}}</h4>
+                <p>{{FASE4_DESC}}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+        <h2>{{CTA_TITULO}}</h2>
+        <p>{{CTA_DESC}}</p>
+        <a href="#contato">{{CTA_BOTAO}}</a>
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>{{FOOTER}}</p>
+</div>
+
+</body>
+</html>
