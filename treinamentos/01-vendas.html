@@ -50,7 +50,10 @@
         .module-card p{color:var(--text-light);margin-top:.25rem;font-size:.8rem}
         .footer{text-align:center;padding:2rem;color:var(--text-light);font-size:.85rem;border-top:1px solid var(--border);margin-top:2rem}
         @media(max-width:768px){.hero h1{font-size:1.5rem}.container{padding:1rem}.section{padding:1.25rem}.nav a{font-size:.75rem;padding:.3rem .6rem}}
-    </style>
+    
+        .back-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--primary);color:#fff;padding:.6rem 1.2rem;border-radius:8px;text-decoration:none;font-size:.9rem;font-weight:500;transition:all .2s;margin:1rem 0}
+        .back-btn:hover{background:var(--primary-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(113,75,103,.3)}
+        .back-btn svg{width:16px;height:16px}</style>
 </head>
 <body>
 
@@ -538,6 +541,11 @@ flowchart TD
 </div>
 
 </div>
+
+        <a href="index.html" class="back-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            Voltar para Página Principal
+        </a>
 
 <div class="footer">
     <p>Treinamento baseado na documentacao dd-modulos Odoo 16 — Localizacao Brasileira OCA</p>
