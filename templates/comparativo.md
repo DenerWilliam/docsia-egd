@@ -1,4 +1,4 @@
-# Comparativo: {{MODULO}} — Odoo 14 vs 16 vs 17
+# Comparativo: {{MODULO}} — Odoo 14 vs 16
 
 {{DESCRICAO}}
 
@@ -7,8 +7,6 @@
 | Versao | Principais Mudancas | Status |
 |--------|---------------------|--------|
 | **v14 → v16** | Mudancas na interface, botoes removidos, edicao inline | Alterado |
-| **v16 → v17** | Framework OWL, sidebar redesenhada, barras de busca | Alterado |
-| **v17 → v18** | Recursos de IA, novas funcionalidades | Novo |
 
 ---
 
@@ -36,7 +34,6 @@
 |--------|---------------|
 | **v14** | Como funcionava |
 | **v16** | Como funciona agora |
-| **v17** | Mudancas recentes |
 
 ### Feature 2
 
@@ -44,7 +41,6 @@
 |--------|---------------|
 | **v14** | Como funcionava |
 | **v16** | Como funciona agora |
-| **v17** | Mudancas recentes |
 
 ---
 

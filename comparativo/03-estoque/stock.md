@@ -16,9 +16,6 @@
 | Odoo 14 | ✅ Disponivel | Versao estavel |
 | Odoo 15 | ✅ Disponivel | Mantido pela Odoo |
 | Odoo 16 | ✅ Disponivel | Versao LTS |
-| Odoo 17 | ✅ Disponivel | Atualizado para OWL |
-| Odoo 18 | ✅ Disponivel | Compativel |
-| Odoo 19 | ✅ Disponivel | Funcional |
 
 ---
 
@@ -88,35 +85,6 @@
 
 ---
 
-### Odoo 16 → Odoo 17
-
-| Elemento | Odoo 16 (Antes) | Odoo 17 (Depois) | O que o cliente ve |
-|----------|-----------------|-------------------|-------------------|
-| **Menu Lateral** | Icones + texto | Icones apenas | Menu mais limpo |
-| **Search Bar** | Barra classica | Chips de filtro | Filtros como pills |
-| **Reporting** | Relatorios classicos | **100% redesenhado** | Dashboards com graficos |
-| **Form** | Estrutura padrao | Mais espacamento | Mais respiro |
-
----
-
-### Odoo 17 → Odoo 18
-
-| Elemento | Odoo 17 (Antes) | Odoo 18 (Depois) | O que o cliente ve |
-|----------|-----------------|-------------------|-------------------|
-| **AI Forecast** | Previsao basica | Previsao com IA | IA prevê demanda |
-| **Otimizacao** | Manual | Sugerida por IA | IA sugere reposicao |
-
----
-
-### Odoo 18 → Odoo 19
-
-| Elemento | Odoo 18 (Antes) | Odoo 19 (Depois) | O que o cliente ve |
-|----------|-----------------|-------------------|-------------------|
-| **AI Forecast** | Previsao basica | Previsao inteligente | IA aprende com historico |
-| **Otimizacao** | Sugerida | Automatica | IA otimiza estoque |
-
----
-
 ## Fluxo Visual: Transferir Estoque
 
 ```
@@ -136,32 +104,7 @@ ODOO 16:
 5. Clica "Validate" (botao no header)
 6. **Chatter mostra historico completo**
 7. **Batch agrupa automaticamente**
-
-ODOO 17+:
-1. Clica "+" (canto direito)
-2. Seleciona tipo
-3. Adiciona produtos
-4. Clica "Validate"
-5. IA sugere otimizacoes
-6. Historico completo no chatter
 ```
-
----
-
-## Breaking Changes
-
-### v16 → v17
-- Views redesenhadas para OWL
-- Campo `quantities` pode ter widgets diferentes
-- Reporting completamente novo
-- Botoes de acao visualmente menores
-
-### v17 → v18
-- APIs de IA podem exigir configuracao
-- Novos campos de forecast
-
-### v18 → v19
-- AI pode automatizar reposicao
 
 ---
 
@@ -171,9 +114,6 @@ ODOO 17+:
 |-----------|--------------|----------------|--------------------------|
 | v14 -> v15 | Baixa | 1-2 dias | Poucas mudancas |
 | v15 -> v16 | **Media** | 2-3 dias | Batch automatico, Chatter |
-| v16 -> v17 | Media | 2-3 dias | Reporting redesenhado |
-| v17 -> v18 | Baixa | 1-2 dias | AI features |
-| v18 -> v19 | Baixa | 1-2 dias | AI avancado |
 
 ---
 
@@ -181,5 +121,4 @@ ODOO 17+:
 
 - Batch automatico e a maior novidade visual em v16
 - Chatter nos transfers melhora rastreabilidade
-- Reporting em v17 e completamente diferente
 - Treinamento necessario para novos recursos

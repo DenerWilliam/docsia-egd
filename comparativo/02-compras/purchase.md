@@ -16,9 +16,6 @@
 | Odoo 14 | ✅ Disponivel | Versao estavel |
 | Odoo 15 | ✅ Disponivel | Mantido pela Odoo |
 | Odoo 16 | ✅ Disponivel | Versao LTS |
-| Odoo 17 | ✅ Disponivel | Atualizado para OWL |
-| Odoo 18 | ✅ Disponivel | Compativel |
-| Odoo 19 | ✅ Disponivel | Funcional |
 
 ---
 
@@ -63,35 +60,6 @@
 
 ---
 
-### Odoo 16 → Odoo 17
-
-| Elemento | Odoo 16 (Antes) | Odoo 17 (Depois) | O que o cliente ve |
-|----------|-----------------|-------------------|-------------------|
-| **Menu Lateral** | Icones + texto | Icones apenas | Menu mais limpo |
-| **Search Bar** | Barra classica | Chips de filtro | Filtros como pills |
-| **Form** | Estrutura padrao | Mais espacamento | Mais respiro |
-| **Kanban** | Cards com bordas | Cards clean | Visual moderno |
-
----
-
-### Odoo 17 → Odoo 18
-
-| Elemento | Odoo 17 (Antes) | Odoo 18 (Depois) | O que o cliente ve |
-|----------|-----------------|-------------------|-------------------|
-| **AI Purchase** | Nao existia | Sugerir fornecedores | IA sugere melhor fornecedor |
-| **AI Price** | Nao existia | Previsao de precos | IA prevê variacao de preco |
-
----
-
-### Odoo 18 → Odoo 19
-
-| Elemento | Odoo 18 (Antes) | Odoo 19 (Depois) | O que o cliente ve |
-|----------|-----------------|-------------------|-------------------|
-| **AI Purchase** | Sugestoes basicas | Compras assistidas por IA | IA cria pedidos automaticamente |
-| **AI Price** | Previsao basica | Previsao inteligente | IA aprende com historico |
-
----
-
 ## Fluxo Visual: Criar Pedido de Compra
 
 ```
@@ -110,31 +78,7 @@ ODOO 16:
 4. Clica "Send by Email" (botao no header)
 5. Clica "Confirm Order" (botao no header)
 6. **Pode criar RFQ alternativas para comparar**
-
-ODOO 17+:
-1. Clica "+" (canto direito)
-2. Seleciona fornecedor
-3. Adiciona produtos
-4. Clica "Confirmar"
-5. IA sugere fornecedores
-6. Comparacao automatica
 ```
-
----
-
-## Breaking Changes
-
-### v16 → v17
-- Views redesenhadas para OWL
-- Call for Tender pode ter estrutura diferente
-- Botoes de acao visualmente menores
-
-### v17 → v18
-- APIs de IA podem exigir configuracao
-- Novos campos de AI no formulario
-
-### v18 → v19
-- AI Purchase pode automatizar compras
 
 ---
 
@@ -144,9 +88,6 @@ ODOO 17+:
 |-----------|--------------|----------------|--------------------------|
 | v14 -> v15 | Baixa | 1-2 dias | Poucas mudancas |
 | v15 -> v16 | Baixa | 1-2 dias | Botoes removidos, RFQ alternativas |
-| v16 -> v17 | Media | 2-3 dias | Menu lateral, search bar |
-| v17 -> v18 | Baixa | 1-2 dias | AI features |
-| v18 -> v19 | Baixa | 1-2 dias | AI avancado |
 
 ---
 

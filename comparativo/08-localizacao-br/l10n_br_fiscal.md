@@ -16,9 +16,6 @@
 | Odoo 14 | ✅ Disponivel | Versao estavel |
 | Odoo 15 | ✅ Disponivel | Mantido pela comunidade |
 | Odoo 16 | ✅ Disponivel | Versao LTS |
-| Odoo 17 | ✅ Disponivel | Atualizado para OWL |
-| Odoo 18 | ✅ Disponivel | Compativel |
-| Odoo 19 | ✅ Disponivel | Funcional |
 
 ---
 
@@ -55,35 +52,6 @@
 
 ---
 
-### Odoo 16 → Odoo 17
-
-| Elemento | Odoo 16 (Antes) | Odoo 17 (Depois) | O que o cliente ve |
-|----------|-----------------|-------------------|-------------------|
-| **Menu Lateral** | Icones + texto | Icones apenas | Menu mais limpo |
-| **Search Bar** | Barra classica | Chips de filtro | Filtros como pills |
-| **Form** | Estrutura padrao | Mais espacamento | Mais respiro |
-| **NF-e** | Layout basico | Layout mais moderno | Visual atualizado |
-
----
-
-### Odoo 17 → Odoo 18
-
-| Elemento | Odoo 17 (Antes) | Odoo 18 (Depois) | O que o cliente ve |
-|----------|-----------------|-------------------|-------------------|
-| **Validacao Fiscal** | Manual | **Sugerida por IA** | IA valida antes de enviar |
-| **Classificacao** | Manual | **Sugerida por IA** | IA classifica produto automaticamente |
-
----
-
-### Odoo 18 → Odoo 19
-
-| Elemento | Odoo 18 (Antes) | Odoo 19 (Depois) | O que o cliente ve |
-|----------|-----------------|-------------------|-------------------|
-| **Validacao Fiscal** | Sugerida | **Automatica** | IA valida e corrige |
-| **Classificacao** | Sugerida | **Automatica** | IA classifica e cadastra |
-
----
-
 ## Fluxo Visual: Emitir NF-e
 
 ```
@@ -103,32 +71,7 @@ ODOO 16:
 4. Clica "Enviar NF-e" (botao no header)
 5. Aguarda autorizacao
 6. Ve status com chave de acesso copiavel
-
-ODOO 17+:
-1. Cria pedido de venda
-2. Documento fiscal criado automaticamente
-3. IA valida dados fiscais
-4. Clica "Enviar"
-5. IA corrige erros automaticamente
-6. Autorizacao mais rapida
 ```
-
----
-
-## Breaking Changes
-
-### v16 → v17
-- Views redesenhadas para OWL
-- Campos `attrs="{'invisible': [...]}"` mudam para `invisible="1"`
-- Widget de analytic pode afetar distribuicao de custos fiscais
-- Botoes de acao visualmente menores
-
-### v17 → v18
-- APIs de IA podem exigir configuracao adicional
-- Novos campos de validacao fiscal
-
-### v18 → v19
-- AI pode automatizar classificacao fiscal
 
 ---
 
@@ -138,15 +81,11 @@ ODOO 17+:
 |-----------|--------------|----------------|--------------------------|
 | v14 -> v15 | Baixa | 2-3 dias | Poucas mudancas |
 | v15 -> v16 | Baixa | 2-3 dias | Botoes removidos |
-| v16 -> v17 | **Media** | 3-5 dias | Menu lateral, views |
-| v17 -> v18 | Baixa | 2-3 dias | AI features |
-| v18 -> v19 | Baixa | 2-3 dias | AI avancado |
 
 ---
 
 ## Notas
 
 - Modulo essencial para empresas brasileiras
-- Migracao v16->v17 e a mais impactante visualmente
 - Treinamento necessario para novos recursos
 - IA pode automatizar validacao fiscal

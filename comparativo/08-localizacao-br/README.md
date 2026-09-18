@@ -1,47 +1,47 @@
 # Comparativo - Módulos Localização Brasileira
 
-| # | Módulo | v14 | v15 | v16 | v17 | v18 | v19 | Observações |
-|---|--------|-----|-----|-----|-----|-----|-----|-------------|
-| 1 | l10n_br_base | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 2 | l10n_br_fiscal | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 3 | l10n_br_nfe | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 4 | l10n_br_account | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 5 | l10n_br_account_due_list | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 6 | l10n_br_cnab_structure | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 7 | l10n_br_cnpj_search | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 8 | l10n_br_coa | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 9 | l10n_br_coa_generic | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 10 | l10n_br_contract | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 11 | l10n_br_currency_rate_update | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 12 | l10n_br_fiscal_certificate | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 13 | l10n_br_fiscal_closing | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 14 | l10n_br_fiscal_dfe | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 15 | l10n_br_mdfe | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 16 | l10n_br_stock | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 17 | l10n_br_sale | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 18 | l10n_br_zip | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 19 | l10n_br_account_fleet | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 20 | l10n_br_account_nfe | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 21 | l10n_br_account_payment_order | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 22 | l10n_br_stock_account | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 23 | l10n_br_fiscal_darf_payment | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 24 | l10n_br_fiscal_service | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 25 | l10n_br_fiscal_validity | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 26 | l10n_br_goods_delivery | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 27 | l10n_br.Helper_Tools | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Escodoo |
-| 28 | l10n_br_sale_order_secondary_unit | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 29 | l10n_br_stock_picking_invoicing | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 30 | l10n_br_fiscal_intrastat | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 31 | l10n_br_fiscal_subscription | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 32 | l10n_br_fiscal_traffic_guide | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 33 | l10n_br_nfe_spec | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 34 | l10n_br_pos | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 35 | l10n_br_product_price_currency | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 36 | l10n_br_repair | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 37 | l10n_br_sale_stock | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 38 | l10n_br_stock_account_followup | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 39 | l10n_br_website_sale | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 40 | l10n_br_edi | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 41 | l10n_br_edi_blog | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 42 | l10n_br_edi_payment | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
-| 43 | l10n_br_edi_purchase | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | OCA/l10n_br |
+| # | Módulo | v14 | v15 | v16 | Observações |
+|---|--------|-----|-----|-----|-------------|
+| 1 | l10n_br_base | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 2 | l10n_br_fiscal | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 3 | l10n_br_nfe | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 4 | l10n_br_account | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 5 | l10n_br_account_due_list | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 6 | l10n_br_cnab_structure | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 7 | l10n_br_cnpj_search | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 8 | l10n_br_coa | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 9 | l10n_br_coa_generic | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 10 | l10n_br_contract | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 11 | l10n_br_currency_rate_update | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 12 | l10n_br_fiscal_certificate | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 13 | l10n_br_fiscal_closing | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 14 | l10n_br_fiscal_dfe | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 15 | l10n_br_mdfe | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 16 | l10n_br_stock | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 17 | l10n_br_sale | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 18 | l10n_br_zip | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 19 | l10n_br_account_fleet | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 20 | l10n_br_account_nfe | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 21 | l10n_br_account_payment_order | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 22 | l10n_br_stock_account | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 23 | l10n_br_fiscal_darf_payment | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 24 | l10n_br_fiscal_service | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 25 | l10n_br_fiscal_validity | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 26 | l10n_br_goods_delivery | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 27 | l10n_br.Helper_Tools | ✅ | ✅ | ✅ | Escodoo |
+| 28 | l10n_br_sale_order_secondary_unit | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 29 | l10n_br_stock_picking_invoicing | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 30 | l10n_br_fiscal_intrastat | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 31 | l10n_br_fiscal_subscription | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 32 | l10n_br_fiscal_traffic_guide | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 33 | l10n_br_nfe_spec | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 34 | l10n_br_pos | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 35 | l10n_br_product_price_currency | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 36 | l10n_br_repair | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 37 | l10n_br_sale_stock | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 38 | l10n_br_stock_account_followup | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 39 | l10n_br_website_sale | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 40 | l10n_br_edi | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 41 | l10n_br_edi_blog | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 42 | l10n_br_edi_payment | ✅ | ✅ | ✅ | OCA/l10n_br |
+| 43 | l10n_br_edi_purchase | ✅ | ✅ | ✅ | OCA/l10n_br |

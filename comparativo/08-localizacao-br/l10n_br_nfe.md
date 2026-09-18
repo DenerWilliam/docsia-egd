@@ -16,9 +16,6 @@
 | Odoo 14 | ✅ Disponível | Versão estável |
 | Odoo 15 | ✅ Disponível | Mantido pela comunidade |
 | Odoo 16 | ✅ Disponível | Versão LTS |
-| Odoo 17 | ✅ Disponível | Atualizado para OWL |
-| Odoo 18 | ✅ Disponível | Compatível |
-| Odoo 19 | ✅ Disponível | Funcional |
 
 ## Funcionalidades por Versão
 
@@ -39,30 +36,12 @@
 - Melhorias de segurança
 - Atualização de campos
 
-### Odoo 17
-- Atualizado para interface OWL
-- Melhorias de UX
-- Novas opções de configuração
-
-### Odoo 18
-- Compatibilidade com novas APIs
-- Melhorias de integração
-- Suporte a novos eventos
-
-### Odoo 19
-- Integração com IA para validação
-- Melhorias de automação
-- Novos fluxos de trabalho
-
 ## Funcionalidades Novas por Versão
 
 | Versão | Funcionalidade Nova |
 |--------|---------------------|
 | v15 | Validação automática de CNPJ/CPF |
 | v16 | Suporte a NF-e 4.0 |
-| v17 | Interface completely redesigned |
-| v18 | Integração com SEFAZ aprimorada |
-| v19 | AI-powered NF-e validation |
 
 ## Migração
 
@@ -70,23 +49,12 @@
 |-----------|--------------|----------------|-------------|
 | v14 → v15 | Baixa | 2-3 dias | Atualização de tabelas |
 | v15 → v16 | Média | 3-4 dias | Mudanças para NF-e 4.0 |
-| v16 → v17 | Média | 3-5 dias | Atualização de interface |
-| v17 → v18 | Baixa | 2-3 dias | Compatível |
-| v18 → v19 | Baixa | 2-3 dias | Atualização menor |
 
 ## Breaking Changes
 
 ### v16
 - Migração para NF-e 4.0
 - Alteração na estrutura de dados
-
-### v17
-- Mudança completa para OWL
-- Atualização dos templates XML
-
-### v18
-- Alterações na API de domínio
-- Atualização dos métodos de validação
 
 ## Notas
 

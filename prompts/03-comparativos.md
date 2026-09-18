@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Gerar documentacao comparativa entre versoes do Odoo (14 vs 16 vs 17) focando em mudancas de interface e funcionalidades.
+Gerar documentacao comparativa entre versoes do Odoo (14 vs 16) focando em mudancas de interface e funcionalidades.
 
 ## Template de Referencia
 
@@ -15,7 +15,7 @@ Usar como base: `templates/comparativo.html` e `templates/comparativo.md`
 O comparativo deve conter:
 
 ```markdown
-# Comparativo: {MODULO} — Odoo 14 vs 16 vs 17
+# Comparativo: {MODULO} — Odoo 14 vs 16
 
 ## Resumo das Mudancas
 - Tabela com versoes e status (Alterado/Novo/Mantido)
@@ -82,7 +82,7 @@ Priorizar documentacao de:
 
 **Entrada:**
 - Modulo: `sale` (Vendas)
-- Versoes: 14, 16, 17
+- Versoes: 14, 16
 
 **Saida:**
 - Arquivo: `sale.md` ou `sale.html`
