@@ -72,6 +72,3 @@ Módulo base para gestão de vendas. Permite criar ordens de venda, gerenciar cl
 
 - v14 → v15: Compatível
 - v15 → v16: Compatível
-- v16 → v17: Requer ajustes de views
-- v17 → v18: Compatível
-- v18 → v19: Compatível com AI CRM

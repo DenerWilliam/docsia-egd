@@ -16,9 +16,6 @@
 | Odoo 14 | ✅ Disponivel | Versao estavel |
 | Odoo 15 | ✅ Disponivel | Mantido pela Odoo |
 | Odoo 16 | ✅ Disponivel | Versao LTS |
-| Odoo 17 | ✅ Disponivel | Atualizado para OWL |
-| Odoo 18 | ✅ Disponivel | Compativel |
-| Odoo 19 | ✅ Disponivel | Funcional |
 
 ---
 
@@ -78,36 +75,6 @@ Analytic Distribution:
 
 ---
 
-### Odoo 16 → Odoo 17
-
-| Elemento | Odoo 16 (Antes) | Odoo 17 (Depois) | O que o cliente ve |
-|----------|-----------------|-------------------|-------------------|
-| **Menu Lateral** | Icones + texto | Icones apenas | Menu mais limpo |
-| **Search Bar** | Barra classica | Chips de filtro | Filtros como pills |
-| **Form** | Estrutura padrao | Mais espacamento | Mais respiro |
-| **Relatorios** | PDF basico | Graficos embutidos | Dashboards visuais |
-| **Kanban** | Cards com bordas | Cards clean | Visual moderno |
-
----
-
-### Odoo 17 → Odoo 18
-
-| Elemento | Odoo 17 (Antes) | Odoo 18 (Depois) | O que o cliente ve |
-|----------|-----------------|-------------------|-------------------|
-| **AI Documents** | Nao existia | Geracao automatica de faturas | IA cria rascunho de fatura |
-| **AI Sign** | Nao existia | Assinatura digital | Cliente assina na tela |
-
----
-
-### Odoo 18 → Odoo 19
-
-| Elemento | Odoo 18 (Antes) | Odoo 19 (Depois) | O que o cliente ve |
-|----------|-----------------|-------------------|-------------------|
-| **AI Documents** | Geracao basica | Documentos inteligentes | IA entende contexto fiscal |
-| **AI Sign** | Assinatura basica | Assinatura com validade juridica | Assinatura mais robusta |
-
----
-
 ## Fluxo Visual: Criar e Postar Fatura
 
 ```
@@ -126,31 +93,7 @@ ODOO 16:
 4. Lance salva automaticamente
 5. Clica "Post" (botao no header)
 6. Lance e criado
-
-ODOO 17+:
-1. Clica "+" (canto direito)
-2. Seleciona cliente
-3. Adiciona linhas
-4. Clica "Confirmar"
-5. IA sugere proximas acoes
 ```
-
----
-
-## Breaking Changes
-
-### v16 → v17
-- Views redesenhadas para OWL
-- Campo `analytic_tag_ids` **REMOVIDO** — usar `analytic_distribution`
-- Widget `many2many_tags` com opcoes diferentes
-- Botoes `oe_highlight` visualmente mais limpos
-
-### v17 → v18
-- APIs de IA podem exigir configuracao
-- Novos campos de AI no formulario
-
-### v18 → v19
-- AI Documents pode substituir digitacao manual
 
 ---
 
@@ -160,9 +103,6 @@ ODOO 17+:
 |-----------|--------------|----------------|--------------------------|
 | v14 -> v15 | Baixa | 1-2 dias | Poucas mudancas |
 | v15 -> v16 | **Media** | 2-3 dias | Analytic muda completamente |
-| v16 -> v17 | Media | 2-3 dias | Menu lateral, search bar |
-| v17 -> v18 | Baixa | 1-2 dias | AI features |
-| v18 -> v19 | Baixa | 1-2 dias | AI avancado |
 
 ---
 

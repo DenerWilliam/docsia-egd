@@ -16,9 +16,6 @@
 | Odoo 14 | ✅ Disponivel | Versao estavel |
 | Odoo 15 | ✅ Disponivel | Mantido pela Odoo |
 | Odoo 16 | ✅ Disponivel | Versao LTS |
-| Odoo 17 | ✅ Disponivel | Atualizado para OWL |
-| Odoo 18 | ✅ Disponivel | Compativel |
-| Odoo 19 | ✅ Disponivel | Funcional |
 
 ---
 
@@ -85,37 +82,6 @@ Analytic Distribution:
 
 ---
 
-### Odoo 16 → Odoo 17
-
-| Elemento | Odoo 16 (Antes) | Odoo 17 (Depois) | O que o cliente ve |
-|----------|-----------------|-------------------|-------------------|
-| **Menu Lateral** | Icones + texto | Icones apenas | Menu mais limpo, texto ao passar mouse |
-| **Botoes de Acao** | Header padrao | Header com botoes menores | Botoes menos "gordinhos" |
-| **Search Bar** | Barra classica | Barra com chips de filtro | Filtros como "pills" removiveis |
-| **Kanban** | Cards com bordas | Cards mais clean | Visual mais moderno |
-| **Form** | Estrutura padrao | Mais espacamento | Mais respiro entre campos |
-
----
-
-### Odoo 17 → Odoo 18
-
-| Elemento | Odoo 17 (Antes) | Odoo 18 (Depois) | O que o cliente ve |
-|----------|-----------------|-------------------|-------------------|
-| **AI CRM** | Nao existia | Sugestoes de proxima acao | Sistema sugere: "Ligar para fulano" |
-| **AI Documents** | Nao existia | Geracao automatica de propostas | Cria proposta com IA baseada no pedido |
-| **AI Sign** | Nao existia | Assinatura digital com IA | Cliente assina digitalmente mais rapido |
-
----
-
-### Odoo 18 → Odoo 19
-
-| Elemento | Odoo 18 (Antes) | Odoo 19 (Depois) | O que o cliente ve |
-|----------|-----------------|-------------------|-------------------|
-| **AI CRM** | Sugestoes basicas | CRM assistido por IA | IA cria leads automaticamente |
-| **AI Documents** | Geracao basica | Documentos inteligentes | IA entende contexto e cria melhores propostas |
-
----
-
 ## Fluxo Visual: Criar Pedido de Venda
 
 ```
@@ -132,31 +98,7 @@ ODOO 16:
 2. Preenche campos (edicao inline, salva automaticamente)
 3. Clica "Confirmar" (botao no header)
 4. Adiciona linhas de produto (botao "Add a product")
-
-ODOO 17+:
-1. Clica "+" (canto direito)
-2. Preenche campos (edicao inline)
-3. Clica "Confirmar" (botao menor no header)
-4. Adiciona linhas (botao "Add a product")
-5. IA sugere proximas acoes
 ```
-
----
-
-## Breaking Changes
-
-### v16 → v17
-- Views redesenhadas para OWL
-- Campos `attrs="{'invisible': [...]}"` mudam para `invisible="1"` (novo formato)
-- Widget `many2many_tags` pode ter opcoes diferentes
-- Botao `oe_highlight` mantido mas visualmente mais limpo
-
-### v17 → v18
-- APIs de IA podem exigir configuracao adicional
-- Novos campos de AI no formulario
-
-### v18 → v19
-- AI CRM pode substituir funcionalidades manuais de qualificacao
 
 ---
 
@@ -166,9 +108,6 @@ ODOO 17+:
 |-----------|--------------|----------------|--------------------------|
 | v14 -> v15 | Baixa | 1-2 dias | Poucas mudancas |
 | v15 -> v16 | Baixa | 1-2 dias | Botoes removidos, edicao inline |
-| v16 -> v17 | **Media** | 2-3 dias | Menu lateral, search bar |
-| v17 -> v18 | Baixa | 1-2 dias | AI features |
-| v18 -> v19 | Baixa | 1-2 dias | AI avancado |
 
 ---
 
